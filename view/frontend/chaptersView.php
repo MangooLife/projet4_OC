@@ -3,7 +3,7 @@
 
 <?php ob_start(); ?>
 	
-	<p>Chapitres</p>
+	<h2>Chapitres</h2>
 
 <?php $content = ob_get_clean(); ?>
 
