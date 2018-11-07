@@ -1,0 +1,22 @@
+/* 
+ * =======================================================================
+ * --------------------------- BACKGROUND -------------------------------
+ * =======================================================================
+ */
+
+html, body{
+  height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  color: #fff;
+}
+
+body.cover{
+  background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/cover.jpg");
+} 
+
+body.book{
+  background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/paper.jpg");
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+}
