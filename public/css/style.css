@@ -1,7 +1,7 @@
 /* 
- * =======================================================================
- * --------------------------- FONT FAMILY -------------------------------
- * =======================================================================
+ =======================================================================
+ --------------------------- FONT FAMILY -------------------------------
+ =======================================================================
  */
 
 @font-face{
@@ -66,32 +66,36 @@
 
 
 /* 
- * =======================================================================
- * ------------------------------ BODY -----------------------------------
- * =======================================================================
+ =======================================================================
+ ------------------------------ BODY -----------------------------------
+ =======================================================================
  */
 
 html, body{
 	font-family: 'CormorantGaramond-Regular', Arial, sans-serif;	
- 	height: 100%;
-	display: -ms-flexbox;
-	display: flex;
+/*	display: -ms-flexbox;
+	display: flex;*/
 	color: #000000;
+	margin: auto;
+	width: 100%;
+	min-height: 100%;
 }
 
-body.cover{
-	background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/cover.jpg");
-} 
-
-body.book{
- 	background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/paper.jpg");
-  	background-repeat: repeat-x;
-  	background-attachment: fixed;
-}
-
-h1, h2{
+h1, h2, h3{
 	font-family: 'CormorantGaramond-Bold', Arial, sans-serif;
 }
+
+/* 
+ =======================================================================
+ ------------------------------ COVER ----------------------------------
+ =======================================================================
+ */
+body.cover{
+	background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/cover.jpg");
+	background-attachment: fixed;
+	background-size: cover;
+	font-size: 20px;
+} 
 
 .infoCover{
 	margin: auto 25%;
@@ -99,7 +103,7 @@ h1, h2{
 	padding: 10px;
 	position: absolute;
 	text-align: center;
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 5px;
 }
 
@@ -117,4 +121,98 @@ h1, h2{
 
 .buttonNovel{
 	text-align: right;
+}
+
+/* 
+ =======================================================================
+ ------------------------------- BOOK ----------------------------------
+ =======================================================================
+ */
+
+/*
+ *
+ * body
+ *
+ */
+body.book{
+ 	background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/paper.jpg");
+  	background-attachment: fixed;
+  	background-size: cover;
+  	font-size: 20px;
+}
+
+body > footer{
+	background-color: black;
+	color: white;
+	height: 100%;
+	padding: 35px;
+	display: flex;
+ 	width: 100%;
+}
+
+footer > div{
+	margin:20px;
+}
+
+.infoAuthor{
+	width: 50%;
+}
+
+.infoSite{
+	width: 50%;
+}
+
+a.infoSite{
+	color: red ;
+}
+
+.titleNovel{
+	font-style: italic;
+	font-weight: bold;
+}
+
+/*
+ *
+ * header
+ *
+ */
+header{
+	/* header sticky */
+	position: -webkit-sticky;  /*required for Safari*/
+    position: sticky;
+    top: 0;/* required as well. */
+	z-index: 99;
+}
+
+.navbar-brand{
+	font-weight: bold !important;
+}
+.buttonsHeader{
+	display: inline-block;
+}
+
+.buttonsHeader > a{
+	padding: 10px;
+}
+
+/*
+ *
+ * chapters 
+ *
+ */
+section{
+	margin: auto 20%;
+	padding-bottom: 20px;
+}
+
+section > h1{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	text-align: center;
+}
+
+section > div{
+
+	text-align: justify;
+	padding: 20px;
 }

@@ -11,13 +11,17 @@
 			switch ($action)
 			{
 				case 'cover':
-					getCover();
+					cover();
 					break;
 				case 'chapters':
-					getChapters();
+					chapters();
 					break;
-				// case: 'chapter'
-				// break;
+				case 'chapter':
+					if(isset($_GET['id_chapter']))
+					{
+						chapter();
+					}
+				break;
 				// case: 'addComment':
 				// break;
 				// case: 'changeCommnent':
@@ -25,12 +29,12 @@
 				// case: 'deleteComment':
 				// break;
 				default:
-					getCover();
+					cover();
 			}
 		}	
 		else
 		{
-			getCover();
+			cover();
 		}
 	} 
 	catch(Exception $e)
