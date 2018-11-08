@@ -28,8 +28,48 @@
         <link href="../projet4.vthamarai.com/public/css/style.css" rel="stylesheet" />   
     </head>
         
-    <body class='cover'>
+    <body class="book">
+
+    	<header>
+    		<nav class="navbar sticky-top navbar-light bg-light">
+			  <a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a>
+			  <span class="buttonsHeader">
+			  	<a class="navbar-brand" href="#"><i class="fas fa-bookmark"></i></a>
+			  	<a class="navbar-brand" href="index.php?action=chapters"><i class="fas fa-book"></i></a>
+			  	<a class="navbar-brand" href="#"><i class="fas fa-power-off"></i></a>
+			  </span>
+			</nav>
+    	</header>
+    	
         <?= $content ?>
+
+        <footer>
+        	<div class="infoAuthor">
+	        	<h3>
+	        		A propos de l'auteur <i class="fas fa-feather-alt"></i>
+	        	</h3>
+	        	<p>
+	        		Jean Forteroche né le 12 décembre 1960, écrit ses premiers romans à l'âge de 18 ans.
+	        		Après le succès de <span class='titleNovel'>"Pas de choix - oui ou oui"</span>, il nous revient avec <span class='titleNovel'>"Billet simple pour l'Alaska"</span> avec un format original 
+	        		dédié exclusivement aux lecteurs du web. 
+	        	<p>
+	        	<p>
+	        		Jean Forteroche né le 12 décembre 1960, écrit ses premiers romans à l'âge de 18 ans.
+	        		Après le succès de <span class='titleNovel'>"Pas de choix - oui ou oui"</span>, il nous revient avec <span class='titleNovel'>"Billet simple pour l'Alaska"</span> avec un format original 
+	        		dédié exclusivement aux lecteurs du web. 
+	        	<p>
+	        </div>
+	        <div class="infoSite">
+	        	<h3>
+	        		Informations 
+	        	</h3>
+		        <ul>
+		        	<li><a class="navbar-brand" href="index.php?action=cover">Résumé</a></li>
+		        	<li><a class="navbar-brand" href="index.php?action=chapters">Chapitres</a></li>
+		        	<li><a class="navbar-brand" href="#">Se connecter</a></li>
+		        </ul>
+	        </div>
+        </footer>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
