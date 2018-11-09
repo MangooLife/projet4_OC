@@ -6,61 +6,61 @@
 
 @font-face{
 	font-family: 'CormorantGaramond-Bold';
-	src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-Bold.ttf');
+	src: url('../font/cormorant-garamond/CormorantGaramond-Bold.ttf');
 	font-weight: normal;
 }
 
 @font-face{
 	font-family: 'CormorantGaramond-BoldItalic';
-	src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-BoldItalic.ttf');
+	src: url('../font/cormorant-garamond/CormorantGaramond-BoldItalic.ttf');
 	font-weight: normal;
 }
 
 @font-face{
 	font-family: 'CormorantGaramond-Italic';
-	src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-Italic.ttf');
+	src: url('../font/cormorant-garamond/CormorantGaramond-Italic.ttf');
 	font-weight: normal;
 }
 
 @font-face{
 	font-family: 'CormorantGaramond-Light';
-	src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-Light.ttf');
+	src: url('../font/cormorant-garamond/CormorantGaramond-Light.ttf');
 	font-weight: normal;
 }
 
 @font-face{
 	font-family: 'CormorantGaramond-LightItalic';
-	src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-LightItalic.ttf');
+	src: url('../font/cormorant-garamond/CormorantGaramond-LightItalic.ttf');
 	font-weight: normal;
 }
 
 @font-face {
     font-family: 'CormorantGaramond-Medium';
-    src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-Medium.ttf');
+    src: url('../font/cormorant-garamond/CormorantGaramond-Medium.ttf');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'CormorantGaramond-MediumItalic';
-    src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-MediumItalic.ttf');
+    src: url('../font/cormorant-garamond/CormorantGaramond-MediumItalic.ttf');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'CormorantGaramond-Regular';
-    src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-Regular.ttf');
+    src: url('../font/cormorant-garamond/CormorantGaramond-Regular.ttf');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'CormorantGaramond-SemiBold';
-    src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-SemiBold.ttf');
+    src: url('../font/cormorant-garamond/CormorantGaramond-SemiBold.ttf');
     font-weight: normal;
 }
 
 @font-face {
     font-family: 'CormorantGaramond-SemiBoldItalic';
-    src: url('http://localhost:8888/projet4.vthamarai.com/public/font/cormorant-garamond/CormorantGaramond-SemiBoldItalic.ttf');
+    src: url('../font/cormorant-garamond/CormorantGaramond-SemiBoldItalic.ttf');
     font-weight: normal;
 }
 
@@ -91,7 +91,7 @@ h1, h2, h3{
  =======================================================================
  */
 body.cover{
-	background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/cover.jpg");
+	background-image: url("../images/cover.jpg");
 	background-attachment: fixed;
 	background-size: cover;
 	font-size: 20px;
@@ -135,10 +135,10 @@ body.cover{
  *
  */
 body.book{
- 	background-image: url("http://localhost:8888/projet4.vthamarai.com/public/images/paper.jpg");
-  	background-attachment: fixed;
-  	background-size: cover;
   	font-size: 20px;
+  	background-image: url("../images/cover.jpg");
+	background-attachment: fixed;
+	background-size: cover;
 }
 
 body > footer{
@@ -200,19 +200,70 @@ header{
  * chapters 
  *
  */
-section{
-	margin: auto 20%;
+.book > section{
+	margin: auto 15%;
 	padding-bottom: 20px;
+	background-image: url("../images/paper.jpg");
+  	background-attachment: fixed;
+  	background-size: cover;
 }
 
 section > h1{
+	margin:10px;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	text-align: center;
+/*	background-image: url("../images/tree.png");
+    background-repeat: repeat-x;
+    background-size: 30px 30px;
+    background-position: bottom;*/
 }
 
 section > div{
-
 	text-align: justify;
 	padding: 20px;
+	padding-left: 70px;
+	padding-right: 70px;
+}
+
+/*
+ *
+ * comments form
+ *
+ */
+
+.comments{
+	display : flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	margin: auto 15%;
+	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.comments label{
+	display: none;
+}
+
+.comments input{
+	margin: 1px;
+}
+
+.listComments:empty{
+	background: blue;
+}
+
+.listComments{
+	overflow-x: scroll;
+	width: 40%;
+	height: 300px;
+}
+
+.listComments p{
+ 	margin: 0;
+}
+
+.listComments span{
+ 	font-weight: bold;
 }

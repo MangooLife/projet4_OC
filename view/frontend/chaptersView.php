@@ -14,6 +14,7 @@
 				echo '<a href="index.php?action=chapter&amp;id_chapter='.$chapter['id'].'"><br/>Lire le chapitre</a>';
 				echo '</div>';
 			}
+			$chapters->closeCursor();
 		?>	
 	</section>
 

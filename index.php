@@ -21,13 +21,21 @@
 					{
 						chapter();
 					}
-				break;
+					break;
 				// case: 'addComment':
-				// break;
+					// break;
 				// case: 'changeCommnent':
-				// break;
+					// break;
 				// case: 'deleteComment':
-				// break;
+					// break;
+				// case: 'signalComment':
+					// break
+				// case: 'login':
+					// break;
+				// case: 'logout':
+					// break;
+				// case: 'registration':
+					// break;
 				default:
 					cover();
 			}
