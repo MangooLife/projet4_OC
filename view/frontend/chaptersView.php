@@ -1,9 +1,10 @@
+<?php session_start(); ?>
 <?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
-<?php $bodyClass = "book" ?>
+<?php $bodyClass = "book"; ?>
 
 <?php ob_start(); ?>
 
-   	<section>
+   	<section class='story'>
     	<h1>CHAPITRES</h1>
 		<?php 
 			while($chapter = $chapters -> fetch())

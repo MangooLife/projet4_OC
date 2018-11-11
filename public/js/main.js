@@ -1,5 +1,5 @@
 document.addEventListener( "DOMContentLoaded", function() {
 	//*
 	//* COMMENTSECTION.JS
-	var commentSection = new CommentSection( ".listComments" );
+	var commentSection = new CommentSection( ".comments" );
 });

@@ -9,12 +9,13 @@ function CommentSection( element ) {
 //3. Ajout de plusieurs méthodes pour Slider (Object Constructor)
 CommentSection.prototype = {
 	init: function() {
+		this.commentsPart = document.querySelector(".listComments");
 		this.emptyDiv();
 	},
 
 	emptyDiv: function(){
-		if(this.el.children.length=== 0){
-	        this.el.innerHTML = "Pas de commentaires pour le moment... <i class=\"far fa-comment-dots\"></i><hr/>";
+		if(this.commentsPart.children.length=== 0){
+	        this.commentsPart.innerHTML = "Pas de commentaires pour le moment... <i class=\"far fa-comment-dots\"></i><hr/>";
 	    } 
 	}
 }

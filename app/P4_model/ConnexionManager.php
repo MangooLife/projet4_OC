@@ -1,59 +1,36 @@
 <?php 
 	namespace app\P4_model;
 
-    require_once("P4_model/Manager.php");
+    require_once("app/P4_model/Manager.php");
 
-	class InscriptionMember extends Manager()
+	class ConnexionManager extends Manager
 	{
-		// Vérification de la validité des informations
-
-		// Hachage du mot de passe
-		$pass_hache = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-
-		// Insertion
-		$req = $bdd->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES(:pseudo, :pass, :email, CURDATE())');
-		$req->execute(array(
-		    'pseudo' => $pseudo,
-		    'pass' => $pass_hache,
-		    'email' => $email));
-	}
-
-	class ConnexionMember extends Manager()()
-	{
-		//  Récupération de l'utilisateur et de son pass hashé
-		$req = $bdd->prepare('SELECT id, pass FROM membres WHERE pseudo = :pseudo');
-		$req->execute(array(
-		    'pseudo' => $pseudo));
-		$resultat = $req->fetch();
-
-		// Comparaison du pass envoyé via le formulaire avec la base
-		$isPasswordCorrect = password_verify($_POST['pass'], $resultat['pass']);
-
-		if (!$resultat)
+		function registrationMember($pseudo, $email, $password)
 		{
-		    echo 'Mauvais identifiant ou mot de passe !';
+			$db = $this->dbConnect();
+
+			$pass_hache = password_hash($password, PASSWORD_DEFAULT);
+
+			$req = $db->prepare('INSERT INTO members(id_user, pseudo, email, password, date_reg) VALUES(1, :pseudo, :email, :password, NOW())');
+			$req->execute(array(
+			    'pseudo' => $pseudo,
+			    'email' => $email,
+			    'password' => $pass_hache
+			));
+
+			return $req;
 		}
-		else
+
+		function connexionMember($pseudo)
 		{
-		    if ($isPasswordCorrect) {
-		        session_start();
-		        $_SESSION['id'] = $resultat['id'];
-		        $_SESSION['pseudo'] = $pseudo;
-		        echo 'Vous êtes connecté !';
-		    }
-		    else {
-		        echo 'Mauvais identifiant ou mot de passe !';
-		    }
+			$db = $this->dbConnect();
+
+			$req = $db->prepare('SELECT id, pseudo, password FROM members WHERE pseudo = :pseudo');
+			$req->execute(array(
+			    'pseudo' => $pseudo
+			));
+			$resultat = $req->fetch();
+
+			return $resultat;
 		}
 	}
-	/* <?php 
-		session_start();
-
-		// Suppression des variables de session et de la session
-		$_SESSION = array();
-		session_destroy();
-
-		// Suppression des cookies de connexion automatique
-		setcookie('login', '');
-		setcookie('pass_hache', '');
-	*/

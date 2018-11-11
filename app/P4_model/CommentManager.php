@@ -13,4 +13,13 @@
 
             return $comments;
 		}
+
+		public function addComment($postId, $author ,$comment)
+		{
+			$db = $this->dbConnect();
+            $comments = $db->prepare('INSERT INTO comments(id_posts, author, comment, comment_date) VALUES(?, ?, ?, NOW())');
+            $affectedLines = $comments->execute(array($postId, $author, $comment));
+
+            return $affectedLines;
+		}
 	}

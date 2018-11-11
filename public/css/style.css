@@ -143,8 +143,9 @@ body.book{
 
 body > footer{
 	background-color: black;
+	background-attachment: fixed;
+	background-size: cover;
 	color: white;
-	height: 100%;
 	padding: 35px;
 	display: flex;
  	width: 100%;
@@ -184,6 +185,20 @@ header{
 	z-index: 99;
 }
 
+.on, .off{
+	padding: 10px;
+	color: white;
+	border-radius: 50%;
+}
+
+.on{
+	background-color: green;
+}
+
+.off{
+	background-color: red;
+}
+
 .navbar-brand{
 	font-weight: bold !important;
 }
@@ -200,7 +215,7 @@ header{
  * chapters 
  *
  */
-.book > section{
+.story{
 	margin: auto 15%;
 	padding-bottom: 20px;
 	background-image: url("../images/paper.jpg");
@@ -208,8 +223,9 @@ header{
   	background-size: cover;
 }
 
-section > h1{
+.story > h1{
 	margin:10px;
+	margin-top: 0px;
 	padding-top: 50px;
 	padding-bottom: 50px;
 	text-align: center;
@@ -219,7 +235,7 @@ section > h1{
     background-position: bottom;*/
 }
 
-section > div{
+.story > div{
 	text-align: justify;
 	padding: 20px;
 	padding-left: 70px;
@@ -250,10 +266,6 @@ section > div{
 	margin: 1px;
 }
 
-.listComments:empty{
-	background: blue;
-}
-
 .listComments{
 	overflow-x: scroll;
 	width: 40%;
@@ -266,4 +278,41 @@ section > div{
 
 .listComments span{
  	font-weight: bold;
+}
+
+/*
+ *
+ * Login/Registration forms
+ *
+ */
+
+.connexionPage{
+	margin: auto 15%;
+	margin-top: 10%;
+	padding: 10px;
+	position: absolute;
+	text-align: center;
+	border-radius: 5px;
+	width: 70%;
+	height: 50%;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.formConnexion{
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 5px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	text-align: justify;
+}
+
+.connexion{
+	padding: 50px;
+}
+
+.registration{
+	padding: 50px;
 }

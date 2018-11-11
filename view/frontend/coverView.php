@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
 
 <?php ob_start(); ?>
