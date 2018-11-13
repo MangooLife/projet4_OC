@@ -7,15 +7,15 @@
 <section class='story'>
 		<?php 
 			echo '<h1>' . strtoupper($chapter['title']) . '</h1>';
-			echo '<div>';
+			echo '<p>';
 			echo $chapter['content'];
-			echo '</div>'; 
+			echo '</p>'; 
 		?>
 </section>
 
 <section class="comments">
 	<div class='formComment'>
-    	<h2> Laisser un commentaire</h2>
+    	<h2>Laisser un commentaire</h2>
     	<?php if(isset($_SESSION['pseudo'])) 
 			{
     	?>
@@ -40,12 +40,51 @@
 	<div class='listComments'>
 		<?php
 			while($comment = $comments -> fetch()) 
-		    {
-    	?>
-	    			<p><span><?= htmlspecialchars($comment['author'])?></span> a écrit le <?= $comment['comment_date_fr']?> : <i class="fas fa-exclamation-circle"></i></p>
-		    		<p><?= htmlspecialchars($comment['comment'])?></p>
-		    		<hr/>
-    	<?php 
+		    {	
+		    	if($comment['report'] == 0)
+		    	{
+		?>
+		    		<p><span><?= htmlspecialchars($comment['author'])?></span> 
+	    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-exclamation-circle'></i> : 
+	    			</p>
+		    		<p><?= htmlspecialchars($comment['comment'])?> -
+		    		<a href='index.php?action=signalComment&amp;id_chapter=<?= $chapter['id']?>&amp;id_comment=<?= $comment['id']?>'>
+	    				Signaler le commentaire
+	    			</a>
+	    			</p>
+		<?php
+		    	} else 
+		    	{
+		    		switch ($comment['management']) 
+		    		{
+		    			case '0':
+		?>
+		    				<p><span><?= htmlspecialchars($comment['author'])?></span> 
+			    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-eye'></i> :
+			    			</p>
+				    		<p><?= htmlspecialchars($comment['comment'])?></p>
+				    		
+		<?php
+		    				break;
+		    			case '1':
+		?>
+		    				<p><span> <?= htmlspecialchars($comment['author'])?></span> 
+			    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-check-circle'></i> : 
+			    			</p>
+				    		<p><?= htmlspecialchars($comment['comment'])?></p>
+		<?php
+		    				break;
+		    			case '2':
+		?>
+		    				<p><span><?= htmlspecialchars($comment['author'])?></span> 
+			    				a écrit le <?= $comment['comment_date_fr']?> : 
+			    			</p>
+				    		<p><i class='fas fa-lock'></i> Commentaire supprimé.</p>
+		<?php
+		    				break;
+		    		}
+		    	}
+		    	echo '<hr/>';
 		    }
 		    $comments->closeCursor();
     	?>

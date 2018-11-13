@@ -186,7 +186,7 @@ header{
 }
 
 .on, .off{
-	padding: 10px;
+	padding: 5px;
 	color: white;
 	border-radius: 50%;
 }
@@ -223,7 +223,7 @@ header{
   	background-size: cover;
 }
 
-.story > h1{
+.story h1{
 	margin:10px;
 	margin-top: 0px;
 	padding-top: 50px;
@@ -235,9 +235,8 @@ header{
     background-position: bottom;*/
 }
 
-.story > div{
+.story p, h2{
 	text-align: justify;
-	padding: 20px;
 	padding-left: 70px;
 	padding-right: 70px;
 }
@@ -280,6 +279,22 @@ header{
  	font-weight: bold;
 }
 
+.listComments a{
+	text-decoration: none;
+}
+
+.fa-exclamation-circle{
+	color: red;
+}
+
+.fa-eye{
+	color: blue;
+}
+
+.fa-check-circle{
+	color: green;
+}
+
 /*
  *
  * Login/Registration forms
@@ -315,4 +330,44 @@ header{
 
 .registration{
 	padding: 50px;
+}
+
+a.retour{
+	padding-top:10px;
+	text-decoration: none;
+}
+
+/* 
+ =======================================================================
+ ---------------------------- RESPONSIVE -------------------------------
+ =======================================================================
+ */
+/* tableau activités du mois*/
+@media screen and (max-width: 600px) {
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    text-align: left;
+  }
+  
+  table td::before {
+    content: attr(data-label);
+    float: left;
+  }
 }

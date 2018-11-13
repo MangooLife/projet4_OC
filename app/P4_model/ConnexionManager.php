@@ -11,21 +11,34 @@
 
 			$pass_hache = password_hash($password, PASSWORD_DEFAULT);
 
-			$req = $db->prepare('INSERT INTO members(id_user, pseudo, email, password, date_reg) VALUES(1, :pseudo, :email, :password, NOW())');
-			$req->execute(array(
-			    'pseudo' => $pseudo,
-			    'email' => $email,
-			    'password' => $pass_hache
-			));
+			// on recherche si ce login est déjà utilisé par un autre membre
+			$req = $db->prepare('SELECT * FROM members WHERE email=:email OR pseudo=:pseudo');
+			$req -> execute(array(
+					'email' => $email,
+					'pseudo' => $pseudo
+				));
+			$resultat = $req->fetch();
 
-			return $req;
+			if (!$resultat) {
+				$member = $db->prepare('INSERT INTO members(is_admin, pseudo, email, password, date_reg) VALUES(0, :pseudo, :email, :password, NOW())');
+				$member->execute(array(
+				    'pseudo' => $pseudo,
+				    'email' => $email,
+				    'password' => $pass_hache
+				));
+			}
+			else {
+				$member = false;
+			}
+
+			return $member;
 		}
 
 		function connexionMember($pseudo)
 		{
 			$db = $this->dbConnect();
 
-			$req = $db->prepare('SELECT id, pseudo, password FROM members WHERE pseudo = :pseudo');
+			$req = $db->prepare('SELECT id, is_admin, pseudo, password FROM members WHERE pseudo = :pseudo');
 			$req->execute(array(
 			    'pseudo' => $pseudo
 			));
