@@ -36,19 +36,20 @@
 		      <?= $comment['comment_date'] ?>
 		    </td>
 		    <td class="lien_tab">
-		      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= $comment['posts_title'] ?></a>
+		      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
 		    </td>
 		    <td>
-		      <?= $comment['comment_txt'] ?>
+		      <?= htmlspecialchars($comment['comment_txt']) ?>
 		    </td>
 		     <td>
-		      <a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>&amp;admin=<?=$_SESSION['is_admin']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-		      <a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>&amp;admin=<?=$_SESSION['is_admin']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
+		      <a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+		      <a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
 		    </td>
 	  	</tr>
   
   	<?php
 			}
+			$allSignalComments->closeCursor();
 	?>
 		</tbody>
 	</table>
@@ -85,13 +86,13 @@
 						      <?= $comment['comment_date'] ?>
 						    </td>
 						    <td class="lien_tab">
-						      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= $comment['posts_title'] ?></a>
+						      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
 						    </td>
 						    <td>
-						      <?= $comment['comment_txt'] ?>
+						      <?= htmlspecialchars($comment['comment_txt']) ?>
 						    </td>
 						     <td>
-						      <a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>&amp;admin=<?=$_SESSION['is_admin']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+						      <a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 						    </td>
 					  	</tr>
 	<?php					
@@ -103,13 +104,13 @@
 						      <?= $comment['comment_date'] ?>
 						    </td>
 						    <td class="lien_tab">
-						      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= $comment['posts_title'] ?></a>
+						      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
 						    </td>
 						    <td>
-						      <?= $comment['comment_txt'] ?>
+						      <?= htmlspecialchars($comment['comment_txt']) ?>
 						    </td>
 						     <td>
-						      <a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>&amp;admin=<?=$_SESSION['is_admin']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
+						      <a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
 						    </td>
 						 </tr>
 	<?php
@@ -121,19 +122,20 @@
 						      <?= $comment['comment_date'] ?>
 						    </td>
 						    <td class="lien_tab">
-						      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= $comment['posts_title'] ?></a>
+						      <a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
 						    </td>
 						    <td>
-						      <?= $comment['comment_txt'] ?>
+						      <?= htmlspecialchars($comment['comment_txt']) ?>
 						    </td>
 						     <td>
-						      <a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>&amp;admin=<?=$_SESSION['is_admin']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
-						      <a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>&amp;admin=<?=$_SESSION['is_admin']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>						    
+						      <a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
+						      <a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>						    
 						    </td>
 						 </tr>
 	<?php
   				}
 			}
+			$allComments->closeCursor();
 	?>
 		</tbody>
 	</table>

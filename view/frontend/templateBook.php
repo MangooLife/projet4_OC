@@ -25,7 +25,7 @@
 		<!-- Bootstrap CSS et JS --> 
    		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
    	<!-- Style CSS -->        
-        <link href="../projet4.vthamarai.com/public/css/style.css" rel="stylesheet" />   
+        <link href="./public/css/style.css" rel="stylesheet" />   
     </head>
         
     <body class="book">
@@ -34,14 +34,14 @@
     		<nav class="navbar sticky-top navbar-light bg-light">
 			  <a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a>
 			  <span class="buttonsHeader">
-			  	<a class="navbar-brand" href="index.php?action=chapters"><i class="fas fa-book"></i></a>
+			  	<a class="navbar-brand" href="index.php?action=chapters&amp;page=1"><i class="fas fa-book"></i></a>
 			  	<?php 
 			  		if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1)
 			  		{
 			  	?>
-			  		<a class="navbar-brand" href="index.php?action=admin&amp;admin=<?=$_SESSION['is_admin']?>"><i class="fas fa-window-maximize"></i></a>
-			  		<a class="navbar-brand" href="index.php?action=admin&amp;admin=<?=$_SESSION['is_admin']?>"><i class="fas fa-comments"></i></a>
-			  		<a class="navbar-brand" href="#"><i class="fas fa-edit"></i></a>
+			  		<a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-window-maximize"></i></a>
+			  		<a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-comments"></i></a>
+			  		<a class="navbar-brand" href="index.php?action=chapterBO&amp;page=1"><i class="fas fa-edit"></i></a>
 			  	<?php
 			  		}
 			  	?>
@@ -80,8 +80,21 @@
 	        	</h3>
 		        <ul>
 		        	<li><a class="navbar-brand" href="index.php?action=cover">Résumé</a></li>
-		        	<li><a class="navbar-brand" href="index.php?action=chapters">Chapitres</a></li>
-		        	<li><a class="navbar-brand" href="#">Se connecter</a></li>
+		        	<li><a class="navbar-brand" href="index.php?action=chapters&amp;page=1">Chapitres</a></li>
+		        	<?php if(isset($_SESSION['pseudo'])) 
+				  		{
+				  	?>
+
+		        			<li><a class="navbar-brand" href="index.php?action=logout">Se déconnecter</a></li>
+					<?php
+						} else
+						{
+					?>
+
+		        			<li><a class="navbar-brand" href="index.php?action=connexion">Se connecter</a></li>
+					<?php 
+						}
+					?>
 		        </ul>
 	        </div>
         </footer>

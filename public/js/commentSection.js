@@ -1,4 +1,4 @@
-//2. Slider (Object Constructor) permettant de récuperer les différents contenus de notre slider (flèches, p et les images)
+//2. CommentSection (Object Constructor) permettant de récuperer les différents contenus de notre slider (flèches, p et les images)
 function CommentSection( element ) {
 	// Attribut implémenté au niveau de l'instance
 	this.el = document.querySelector( element );
@@ -6,7 +6,7 @@ function CommentSection( element ) {
 	this.init();
 }
 
-//3. Ajout de plusieurs méthodes pour Slider (Object Constructor)
+//3. Ajout de plusieurs méthodes pour CommentSection (Object Constructor)
 CommentSection.prototype = {
 	init: function() {
 		this.commentsPart = document.querySelector(".listComments");

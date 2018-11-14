@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require('controller/frontend.php');
 	require('controller/backend.php');
 
@@ -15,16 +16,122 @@
 					cover();
 					break;
 				case 'chapters':
-					chapters();
+					if(isset($_GET['page']) && $_GET['page'] > 0)
+					{
+						chapters($_GET['page']);
+					} else 
+					{
+						throw new Exception('Il n\'y pas autant de chapitres...');
+					}
 					break;
 				case 'chapter':
 					if(isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0)
 					{
-						chapter();
+						chapter($_GET['id_chapter']);
 					} else 
 					{
-						chapters();	
+						throw new Exception('Ce chapitre n\'existe pas...');    	
 					}
+					break;
+				case 'chapterBO':
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if(isset($_GET['page']) && $_GET['page'] > 0)
+						{
+							chaptersBO($_GET['page']);
+						} else 
+						{
+							throw new Exception('Il n\'y pas autant de chapitres...');
+						}
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}
+					break;
+				case 'createChapter':
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if (!empty($_POST['title']) && !empty($_POST['content'])) {
+							createChapters($_POST['title'], $_POST['content']);
+			            } else {
+			                throw new Exception('Le chapitre n\'a pas pu être supprimé');
+			            }	
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}	
+					break;
+				case 'updateChapter':
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
+							getChapter( $_GET['id_chapter']);
+			            } else {
+			                throw new Exception('Le chapitre n\'a pas pu être chargé');
+			            }	
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}
+					break;
+				case 'changeChapter':
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if (isset($_GET['id_chapter']) && $_GET['id_chapter'] && !empty($_POST['title']) && !empty($_POST['content'])) {
+							changeChapter( $_GET['id_chapter'], $_POST['title'], $_POST['content']);
+			            } else {
+			                throw new Exception('Le chapitre n\'a pas pu être changé');
+			            }	
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}
+					break;
+				case 'deleteChapter': 
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
+							deleteChapter($_GET['id_chapter']);
+			            } else {
+			                throw new Exception('Le chapitre n\'a pas pu être supprimé');
+			            }	
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}	
+					break;
+				case 'draftChapter': 
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
+							draftChapter($_GET['id_chapter']);
+			            } else {
+			                throw new Exception('Le chapitre n\'a pas pu être mis en brouillon');
+			            }	
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}	
+					break;
+				case 'repostChapter': 
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
+					{
+						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
+							repostChapter($_GET['id_chapter']);
+			            } else {
+			                throw new Exception('Le chapitre n\'a pas pu être remis en ligne');
+			            }	
+			        }
+					else
+					{
+						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+					}	
 					break;
 				case 'addComment':
 					if (isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0) {
@@ -32,7 +139,6 @@
 		                    comments($_GET['id_chapter'], $_POST['author'], $_POST['comment']);
 		                } else {
 		                    throw new Exception('Tous les champs ne sont pas remplis !');
-		                    // require('view/errorCommentaire.php');
 		                }
 		            }
 		            else {
@@ -42,10 +148,9 @@
 				case 'signalComment':
 					if (isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0) {
 		                if (isset($_GET['id_comment']) && $_GET['id_comment']) {
-		                    signal();
+		                    signal($_GET['id_comment'], $_GET['id_chapter']);
 		                } else {
 		                    throw new Exception('Une erreur s\'est glissée dans votre demande...');
-		                    // require('view/errorCommentaire.php');
 		                }
 		            }
 		            else {
@@ -53,36 +158,32 @@
 		            }
 					break;
 				case 'deleteComment':
-			        if(isset($_GET['admin']) && $_GET['admin'] == 1)
+			        if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_comment']) && $_GET['id_comment']) {
-			                deleteComment();
+			                deleteComment($_GET['id_comment']);
 			            } else {
 			                throw new Exception('Le commentaire n\'a pas pu être supprimé');
-			            	// require('view/errorCommentaire.php');
 			            }
 			        }
 					else
 					{
 						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
 					}
-					break;
 					break;
 				case 'valideComment':
-				    if(isset($_GET['admin']) && $_GET['admin'] == 1)
+				    if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_comment']) && $_GET['id_comment']) {
-			                validateComment();
+			                validateComment($_GET['id_comment']);
 			            } else {
 			                throw new Exception('Le commentaire n\'a pas pu être validé');
-			            	// require('view/errorCommentaire.php');
 			            }
 			        }
 					else
 					{
 						throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
 					}
-					break;
 					break;
 				case 'connexion':
 					if(!isset($_SESSION['pseudo']))
@@ -96,7 +197,7 @@
 				case 'login':
 					if(!empty($_POST['pseudo']) && !empty($_POST['mdp']))
 					{
-						login();
+						login($_POST['pseudo'], $_POST['mdp']);
 					}	
 					else
 					{
@@ -109,7 +210,7 @@
 				case 'registration':
 					if(!empty($_POST['pseudo_reg']) && !empty($_POST['mail_reg']) && !empty($_POST['mdp_reg']))
 					{
-						registration();
+						registration($_POST['pseudo_reg'], $_POST['mail_reg'], $_POST['mdp_reg']);
 					}
 					else
 					{
@@ -117,9 +218,9 @@
 					}
 					break;
 				case 'admin':
-					if(isset($_GET['admin']) && $_GET['admin'] == 1)
+					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
-						admin();
+						admin($_SESSION['is_admin']);
 					}
 					else
 					{
@@ -138,6 +239,5 @@
 	catch(Exception $e)
 	{
 		$errorMessage = $e->getMessage();
-		echo $errorMessage;
-    	// require('view/errorView.php');
+    	require('view/errorView.php');
 	}

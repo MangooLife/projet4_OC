@@ -241,6 +241,10 @@ header{
 	padding-right: 70px;
 }
 
+.pagination{
+	padding-left: 100px;
+}
+
 /*
  *
  * comments form
@@ -335,6 +339,52 @@ header{
 a.retour{
 	padding-top:10px;
 	text-decoration: none;
+}
+
+/*
+ *
+ * backoffice
+ *
+ */
+
+.formPost label{
+	display: none;
+}
+
+.formPost input[type=submit]{
+	margin: 10px;
+}
+
+.formPost{
+	margin: auto;
+	width: 0%;
+	justify-content: center;
+	margin-bottom: 20px;
+	display: none;
+}
+
+.updatePost label{
+	display: none;
+}
+
+.updatePost input[type=submit]{
+	margin: 10px;
+}
+
+.updatePost{
+	margin: auto;
+	width: 70%;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.mce-notification-warning{
+	display: none;
+}
+
+/* error pages */
+.stopErreur{
+	width: 100%;
 }
 
 /* 

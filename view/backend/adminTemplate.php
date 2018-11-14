@@ -11,7 +11,7 @@
         <!-- Bootstrap CSS et JS --> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Style CSS -->        
-        <link href="../projet4.vthamarai.com/public/css/style.css" rel="stylesheet" />   
+        <link href="./public/css/style.css" rel="stylesheet" />   
     </head>
         
     <body class="book">
@@ -20,10 +20,10 @@
             <nav class="navbar sticky-top navbar-light bg-light">
               <a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a>
               <span class="buttonsHeader">
-                <a class="navbar-brand" href="index.php?action=chapters"><i class="fas fa-book"></i></a>
-                <a class="navbar-brand" href="index.php?action=chapters"><i class="far fa-window-maximize"></i></a>
-                <a class="navbar-brand" href="index.php?action=admin&amp;admin=<?=$_SESSION['is_admin']?>"><i class="fas fa-comments"></i></a>
-                <a class="navbar-brand" href="#"><i class="fas fa-edit"></i></a>
+                <a class="navbar-brand" href="index.php?action=chapters&amp;page=1"><i class="fas fa-book"></i></a>
+                <a class="navbar-brand" href="index.php?action=chapters&amp;page=1"><i class="far fa-window-maximize"></i></a>
+                <a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-comments"></i></a>
+                <a class="navbar-brand" href="index.php?action=chapterBO&amp;page=1"><i class="fas fa-edit"></i></a>
                 <?php if(isset($_SESSION['pseudo'])) 
                     {
                 ?>
@@ -59,8 +59,21 @@
                 </h3>
                 <ul>
                     <li><a class="navbar-brand" href="index.php?action=cover">Résumé</a></li>
-                    <li><a class="navbar-brand" href="index.php?action=chapters">Chapitres</a></li>
-                    <li><a class="navbar-brand" href="#">Se connecter</a></li>
+                    <li><a class="navbar-brand" href="index.php?action=chapters&amp;page=1">Chapitres</a></li>
+                    <?php if(isset($_SESSION['pseudo'])) 
+                        {
+                    ?>
+
+                            <li><a class="navbar-brand" href="index.php?action=logout">Se déconnecter</a></li>
+                    <?php
+                        } else
+                        {
+                    ?>
+
+                            <li><a class="navbar-brand" href="index.php?action=connexion">Se connecter</a></li>
+                    <?php 
+                        }
+                    ?>
                 </ul>
             </div>
         </footer>
@@ -69,5 +82,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea' });</script>
     </body>
 </html>

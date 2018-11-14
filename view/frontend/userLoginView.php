@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
 
 <?php ob_start(); ?>
@@ -14,7 +13,7 @@
 						<input type='submit' value='Connexion'/>
 					</form>
 					<hr/>
-					<a class="retour" href="index.php?action=chapters"><i class="fas fa-arrow-circle-left"></i> Retour aux chapitres</a>
+					<a class="retour" href="index.php?action=chapters&amp;page=1"><i class="fas fa-arrow-circle-left"></i> Retour aux chapitres</a>
 				</div>
 				<div class='registration'>
 					<h2>Inscription</h2>
@@ -24,10 +23,20 @@
 						<label for='mdp_reg'>Mot de passe<br/><input type='password' id='mdp_reg' name='mdp_reg' required/></label><br/>
 						<input type='submit' value='Inscription'/>
 					</form>
+					<?php 
+						if(!empty($successMsg))
+						{
+					?>
+							<div class="alert alert-secondary" role="alert">
+							  <?php echo $successMsg; ?>
+							</div>
+					<?php
+						}
+					?>
 				</div>
 			</div>
 		</section>
-		
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('template.php'); ?>

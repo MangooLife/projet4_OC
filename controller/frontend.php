@@ -13,23 +13,24 @@
 	    require('view/frontend/userLoginView.php');
 	}
 
-	function registration(){
+	function registration($pseudo_reg, $mail_reg, $mdp_reg){
 		$connexionManager = new \app\P4_model\ConnexionManager();
-		$affectedMember = $connexionManager -> registrationMember($_POST['pseudo_reg'], $_POST['mail_reg'], $_POST['mdp_reg']);
+		$affectedMember = $connexionManager -> registrationMember($pseudo_reg, $mail_reg, $mdp_reg);
 
 		if ($affectedMember === false) {
 	        throw new Exception('Impossible d\'ajouter le membre. Il est possible que le pseudo ou l\'email existe déjà');
 	    }
 	    else {
-	        header('Location:index.php?action=chapters');
+	    	$successMsg = "Vous êtes bien inscrit. Veuillez vous connecter pour profiter pleinement de la section commentaire.";
+	        header('Location:index.php?action=connexion');
 	    }
 	}
 
-	function login(){
+	function login($pseudo, $mdp){
 		$connexionManager = new \app\P4_model\ConnexionManager();
-		$loginMember = $connexionManager -> connexionMember($_POST['pseudo']);
+		$loginMember = $connexionManager -> connexionMember($pseudo);
 
-		$isPasswordCorrect = password_verify($_POST['mdp'], $loginMember['password']);
+		$isPasswordCorrect = password_verify($mdp, $loginMember['password']);
 
 		if ($loginMember === false)
 		{
@@ -44,14 +45,14 @@
 			        $_SESSION['id'] = $loginMember['id'];
 			        $_SESSION['is_admin'] = $loginMember['is_admin'];
 			        $_SESSION['pseudo'] = $loginMember['pseudo'];
-			        header('Location:index.php?action=chapters');
+			        header('Location:index.php?action=chapters&page=1');
 			    } else if($loginMember['is_admin'] == 1)
 			    {
 					session_start();
 			        $_SESSION['id'] = $loginMember['id'];
 			        $_SESSION['is_admin'] = $loginMember['is_admin'];
 			        $_SESSION['pseudo'] = $loginMember['pseudo'];
-			       	header('Location:index.php?action=admin&admin='.$loginMember['is_admin']);
+			       	header('Location:index.php?action=admin');
 			    }
 		    }
 		    else {
@@ -60,11 +61,10 @@
 		}
 	}
 
-	function admin()
+	function admin($admin)
 	{
-		if(isset($_GET['admin']) && $_GET['admin'] == 1)
+		if(isset($admin) && $admin == 1)
 		{
-			session_start();
 
 			$commentManager = new \app\P4_model\CommentManager();
 	    	$allSignalComments = $commentManager->getSignalComments();
@@ -85,21 +85,35 @@
 		header('Location:index.php?action=connexion');
 	}
 
-	function chapters()
+	function chapters($n_page)
 	{
-
+		// $chaptersManager = new \app\P4_model\ChaptersManager();
+		// $chapters= $chaptersManager -> getChapters();
+		$chapterPerPage = 4;
 		$chaptersManager = new \app\P4_model\ChaptersManager();
-		$chapters= $chaptersManager -> getChapters();
+		$chaptersTotal = $chaptersManager -> getAllChapters();
+		$pagesTotal = ceil($chaptersTotal['total']/$chapterPerPage);
+
+		if(isset($n_page) && !empty($n_page) && ($n_page>0) && ($n_page<= $pagesTotal))
+		{
+			$n_page = intval($n_page);
+			$pageCurrent = $n_page;
+		} else 
+		{
+			$pageCurrent = 1;
+		}
+		$start = ($pageCurrent - 1) * $chapterPerPage;
+		$chapters= $chaptersManager->getChapters($start, $chapterPerPage);
 	    require('view/frontend/chaptersView.php');
 	}
 
-	function chapter()
+	function chapter($id_chapter)
 	{
 		$chaptersManager = new \app\P4_model\ChaptersManager();
 		$commentManager = new \app\P4_model\CommentManager();
 
-		$chapter= $chaptersManager -> getChapter($_GET['id_chapter']);
-		$comments = $commentManager -> getComments($_GET['id_chapter']);
+		$chapter= $chaptersManager -> getChapter($id_chapter);
+		$comments = $commentManager -> getComments($id_chapter);
 
 		if($chapter['online'] == 1)
 		{
@@ -110,31 +124,31 @@
 	   	}
 	}
 
-	function comments($postId, $author, $comment)
+	function comments($id_chapter, $author, $comment)
 	{
 		$commentManager = new \app\P4_model\CommentManager();
 
-	    $affectedLines = $commentManager->addComment($postId, $author, $comment);
+	    $affectedLines = $commentManager->addComment($id_chapter, $author, $comment);
 
 	    if ($affectedLines === false) {
 	        throw new Exception('Impossible d\'ajouter le commentaire !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapter&id_chapter='.$postId);
+	        header('Location:index.php?action=chapter&id_chapter='.$id_chapter);
 	    }
 	} 
 
-	function signal()
+	function signal($id_comment, $id_chapter)
 	{
 		$commentManager = new \app\P4_model\CommentManager();
 
-	    $affectedLines = $commentManager->signalComment($_GET['id_comment']);
+	    $affectedLines = $commentManager->signalComment($id_comment);
 
 	    if ($affectedLines === false) {
 	        throw new Exception('Impossible de signaler le commentaire !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapter&id_chapter='.$_GET['id_chapter']);
+	        header('Location:index.php?action=chapter&id_chapter='.$id_chapter);
 	    }
 
 	}

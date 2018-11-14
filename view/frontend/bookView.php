@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
 <?php $bodyClass = "book"; ?>
 
@@ -21,7 +20,7 @@
     	?>
 		    	<form action='index.php?action=addComment&amp;id_chapter=<?= $chapter['id'] ?>' method='POST'>
 		    		<label for='author'>author : </label><input type='type' id='author' name='author' class="form-control" size='49' value='<?= htmlspecialchars($_SESSION['pseudo'])?>' readonly/><br/>
-		    		<label for='comment'>Commentaire :</label><textarea id='comment' name='comment' class="form-control" placeholder='Un commentaire ?' rows='3' cols='50' required ></textarea><br>
+		    		<label for='comment'>Commentaire :</label><textarea id='comment' name='comment' class="form-control" placeholder='Un commentaire ?' rows='3' cols='50' required ></textarea><br/>
 		    		<input type='submit' value='Valider'/>
 		    	</form>
 		<?php 

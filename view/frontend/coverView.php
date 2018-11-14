@@ -1,4 +1,3 @@
-<?php session_start() ?>
 <?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
 
 <?php ob_start(); ?>
@@ -17,7 +16,7 @@
 		</p>
 
 		<div class="buttonNovel">
-			<a class="btn btn-lg btn-secondary" href="index.php?action=chapters">Lire le roman ></a>
+			<a class="btn btn-lg btn-secondary" href="index.php?action=chapters&amp;page=1">Lire le roman ></a>
 		</div>
 	</section>
 
