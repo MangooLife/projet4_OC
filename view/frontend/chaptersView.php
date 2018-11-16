@@ -10,8 +10,8 @@
 			{
 				if($chapter['online'] == 1)
 				{
-					echo '<div>';
-					echo '<h2>' . strtoupper(strip_tags($chapter['title'])) . '</h2>';
+					echo '<div class="titleChap">';
+					echo '<h2>' . strip_tags($chapter['title']) . '</h2>';
 					echo '<p>'.strip_tags($chapter['excerpt']).'...</p>';
 					echo '<p><a href="index.php?action=chapter&amp;id_chapter='.$chapter['id'].'">Lire le chapitre</a></p>';
 					echo '</div>';

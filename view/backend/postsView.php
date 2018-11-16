@@ -16,18 +16,18 @@
 		</form>
 
 		<table class="table table-striped table-dark">
-		  <thead>
-			<tr class="tableactivite">
-			   	<th scope="col">
-			    	Date
-			    </th>
-			    <th scope="col">
-			    	Article / Extrait
-			    </th>
-			   	<th scope="col">
-			      Options
-			    </th>
-			</tr>
+		  	<thead>
+				<tr class="tableactivite">
+				   	<th scope="col">
+				    	Date
+				    </th>
+				    <th scope="col">
+				    	Article / Extrait
+				    </th>
+				   	<th scope="col">
+				      	Options
+				    </th>
+				</tr>
 		  	</thead>
 			<tbody>
 
@@ -39,16 +39,17 @@
 		?>
 							<tr class="scale-up-ver-center bg-warning">
 							    <td class="font-weight-bold">
-							      <?= $chapter['creation_date_fr'] ?>
+							      	<?= $chapter['creation_date_fr'] ?>
 							    </td>
 							    <td class="lien_tab">
-							      <a href="index.php?action=chapter&id_chapter=<?= $chapter['id'] ?>"><?=strip_tags($chapter['title']) ?></a><br/>
-							      <?= strip_tags($chapter['excerpt']) ?>
+							      	<a href="index.php?action=chapter&id_chapter=<?= $chapter['id'] ?>"><?=strip_tags($chapter['title']) ?></a><br/>
+							      	<?= strip_tags($chapter['excerpt']) ?>
 							    </td>
-							     <td>
-							      <a href="index.php?action=repostChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
-							      <a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary"><i class="fas fa-pen update"></i></a>
-							      <a href="index.php?action=deleteChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							    <td>
+							      	<a href="index.php?action=repostChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
+							      	<a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary"><i class="fas fa-pen update"></i></a>
+							      	<!-- <a href="index.php?action=deleteChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> -->
+							      	<a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 							    </td>
 						  	</tr>
 	  
@@ -58,16 +59,17 @@
 	  	?>
 	  						<tr class="scale-up-ver-center">
 							    <td class="font-weight-bold">
-							      <?= $chapter['creation_date_fr'] ?>
+							      	<?= $chapter['creation_date_fr'] ?>
 							    </td>
 							    <td class="lien_tab">
-							      <a href="index.php?action=chapter&id_chapter=<?= $chapter['id'] ?>"><?= strip_tags($chapter['title']) ?></a><br/>
-							      <?= strip_tags($chapter['excerpt']) ?>...
+							      	<a href="index.php?action=chapter&id_chapter=<?= $chapter['id'] ?>"><?= strip_tags($chapter['title']) ?></a><br/>
+							      	<?= strip_tags($chapter['excerpt']) ?>...
 							    </td>
-							     <td>
-							      <a href="index.php?action=draftChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-light"><i class="fas fa-file-contract"></i></a>
-							      <a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary update"><i class="fas fa-pen update"></i></a>
-							      <a href="index.php?action=deleteChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							    <td>
+							      	<a href="index.php?action=draftChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-light"><i class="fas fa-file-contract"></i></a>
+							      	<a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary update"><i class="fas fa-pen update"></i></a>
+							      	<!-- <a href="index.php?action=deleteChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> -->
+							      	<a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 							    </td>
 						  	</tr>
 	  	<?php
@@ -78,29 +80,29 @@
 		?>
 			</tbody>
 			<div>
-		 	<ul class="pagination pagination-sm">
-		 		<?php 
-			 		for ($i=1; $i < $pagesTotal + 1; $i++) { 
-			 			if($_GET['page'] == $i)
-			 			{
-			 	?>
-							<li class="page-item disabled">
-								<a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>" tabindex="-1"><?=$i?></a>
-							</li>
-				<?php
-			 			} else 
-			 			{
-			 	?>
-			 				<li class="page-item"><a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>"><?=$i?></a></li>
-			 	<?php
-			 			}
-					}
-				?>
-		  	</ul>
-		</div>
+			 	<ul class="pagination pagination-sm">
+			 		<?php 
+				 		for ($i=1; $i < $pagesTotal + 1; $i++) { 
+				 			if($_GET['page'] == $i)
+				 			{
+				 	?>
+								<li class="page-item disabled">
+									<a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>" tabindex="-1"><?=$i?></a>
+								</li>
+					<?php
+				 			} else 
+				 			{
+				 	?>
+				 				<li class="page-item"><a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>"><?=$i?></a></li>
+				 	<?php
+				 			}
+						}
+					?>
+			  	</ul>
+			</div>
 		</table>
 	</section>
 
 <?php $content = ob_get_clean(); ?>
-		<script src="./public/js/postSection.js"></script>
+	<script src="./public/js/postSection.js"></script>
 <?php require('adminTemplate.php'); ?>

@@ -15,15 +15,31 @@
 
 	function registration($pseudo_reg, $mail_reg, $mdp_reg){
 		$connexionManager = new \app\P4_model\ConnexionManager();
-		$affectedMember = $connexionManager -> registrationMember($pseudo_reg, $mail_reg, $mdp_reg);
 
-		if ($affectedMember === false) {
-	        throw new Exception('Impossible d\'ajouter le membre. Il est possible que le pseudo ou l\'email existe déjà');
-	    }
-	    else {
-	    	$successMsg = "Vous êtes bien inscrit. Veuillez vous connecter pour profiter pleinement de la section commentaire.";
-	        header('Location:index.php?action=connexion');
-	    }
+		$verificationPseudo = preg_match('#^.{6,}$#', $pseudo_reg);
+		$verificationPassword = preg_match_all('#^.{6,}$#', $mdp_reg);
+
+		if($verificationPseudo)
+		{
+			if($verificationPassword)
+			{
+				$affectedMember = $connexionManager -> registrationMember($pseudo_reg, $mail_reg, $mdp_reg);
+
+				if ($affectedMember === false) {
+			        throw new Exception('Impossible d\'ajouter le membre. Il est possible que le pseudo ou l\'email existe déjà');
+			    }
+			    else {
+			    	$successMsg = "Vous êtes bien inscrit. Veuillez vous connecter pour profiter pleinement de la section commentaire.";
+			        login($pseudo_reg, $mdp_reg);
+			    }
+			} else
+			{
+				throw new Exception('Votre mot de passe n\'est pas assez fort. Il faut au moins 6 caractères.');
+			}
+		} else
+		{
+			throw new Exception('Votre pseudo n\'est pas assez long. Il faut au moins 6 caractères.');
+		}
 	}
 
 	function login($pseudo, $mdp){
@@ -134,7 +150,7 @@
 	        throw new Exception('Impossible d\'ajouter le commentaire !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapter&id_chapter='.$id_chapter);
+	        header('Location:index.php?action=chapter&id_chapter='.$id_chapter.'#commentaires');
 	    }
 	} 
 

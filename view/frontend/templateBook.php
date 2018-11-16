@@ -32,32 +32,43 @@
 
     	<header>
     		<nav class="navbar sticky-top navbar-light bg-light">
-			  <a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a>
-			  <span class="buttonsHeader">
-			  	<a class="navbar-brand" href="index.php?action=chapters&amp;page=1"><i class="fas fa-book"></i></a>
-			  	<?php 
-			  		if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1)
+    			<?php if(isset($_SESSION['pseudo'])) 
 			  		{
 			  	?>
-			  		<a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-window-maximize"></i></a>
-			  		<a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-comments"></i></a>
-			  		<a class="navbar-brand" href="index.php?action=chapterBO&amp;page=1"><i class="fas fa-edit"></i></a>
-			  	<?php
-			  		}
-			  	?>
-			  	<?php if(isset($_SESSION['pseudo'])) 
-			  		{
-			  	?>
-				  		<a class="navbar-brand" href="index.php?action=logout"><i class="fas fa-power-off on"></i></a>
+			  		<a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i> | Bienvenue <?= $_SESSION['pseudo']?></a> 
 				<?php
 					} else
 					{
 				?>
-				  		<a class="navbar-brand" href="index.php?action=connexion"><i class="fas fa-power-off off"></i></a>
+					<a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a>
 				<?php 
-					}
+						}
 				?>
-			  </span>
+			  	<span class="buttonsHeader">
+			  		<a class="navbar-brand" href="index.php?action=chapters"><i class="fas fa-book"></i></a>
+				  	<?php 
+				  		if(isset($_SESSION['is_admin']) && $_SESSION['is_admin']==1)
+				  		{
+				  	?>
+				  		<a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-window-maximize"></i></a>
+				  		<a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-comments"></i></a>
+				  		<a class="navbar-brand" href="index.php?action=chapterBO&amp;page=1"><i class="fas fa-edit"></i></a>
+				  	<?php
+				  		}
+				  	?>
+				  	<?php if(isset($_SESSION['pseudo'])) 
+				  		{
+				  	?>
+					  		<a class="navbar-brand" href="index.php?action=logout"><i class="fas fa-power-off on"></i></a>
+					<?php
+						} else
+						{
+					?>
+					  		<a class="navbar-brand" href="index.php?action=connexion"><i class="fas fa-power-off off"></i></a>
+					<?php 
+						}
+					?>
+			  	</span>
 			</nav>
     	</header>
 
@@ -80,7 +91,7 @@
 	        	</h3>
 		        <ul>
 		        	<li><a class="navbar-brand" href="index.php?action=cover">Résumé</a></li>
-		        	<li><a class="navbar-brand" href="index.php?action=chapters&amp;page=1">Chapitres</a></li>
+		        	<li><a class="navbar-brand" href="index.php?action=chapters">Chapitres</a></li>
 		        	<?php if(isset($_SESSION['pseudo'])) 
 				  		{
 				  	?>

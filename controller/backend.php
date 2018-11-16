@@ -63,7 +63,7 @@
 	        throw new Exception('Impossible d\'ajouter le chapitre !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapterBO&page=1');
+	        header('Location:index.php?action=chapterBO');
 	    }
 	}
 
@@ -76,7 +76,7 @@
 	        throw new Exception('Impossible de supprimer le chapitre !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapterBO&page=1');
+	        header('Location:index.php?action=chapterBO');
 	    }
 	}
 
@@ -89,7 +89,7 @@
 	        throw new Exception('Impossible de mettre le chapitre en brouillon !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapterBO&page=1');
+	        header('Location:index.php?action=chapterBO');
 	    }
 	}
 
@@ -102,7 +102,7 @@
 	        throw new Exception('Impossible de mettre en ligne le chapitre !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapterBO&page=1');
+	        header('Location:index.php?action=chapterBO');
 	    }
 	}
 

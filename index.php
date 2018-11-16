@@ -21,7 +21,7 @@
 						chapters($_GET['page']);
 					} else 
 					{
-						throw new Exception('Il n\'y pas autant de chapitres...');
+						header('Location:index.php?action=chapters&page=1');
 					}
 					break;
 				case 'chapter':
@@ -41,7 +41,7 @@
 							chaptersBO($_GET['page']);
 						} else 
 						{
-							throw new Exception('Il n\'y pas autant de chapitres...');
+							header('Location:index.php?action=chapterBO&page=1');
 						}
 			        }
 					else
@@ -135,8 +135,8 @@
 					break;
 				case 'addComment':
 					if (isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0) {
-		                if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-		                    comments($_GET['id_chapter'], $_POST['author'], $_POST['comment']);
+		                if (!empty($_SESSION['pseudo']) && !empty($_SESSION['pseudo'])) {
+		                    comments($_GET['id_chapter'], $_SESSION['pseudo'], $_POST['comment']);
 		                } else {
 		                    throw new Exception('Tous les champs ne sont pas remplis !');
 		                }
