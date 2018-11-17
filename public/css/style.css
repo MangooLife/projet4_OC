@@ -255,6 +255,20 @@ header{
 
 /*
  *
+ * Chapter page
+ *
+ */
+
+.container{
+	margin: auto;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 100px;
+	margin-bottom: 50px;
+}
+
+/*
+ *
  * comments form
  *
  */

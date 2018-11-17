@@ -131,8 +131,12 @@
 		$chapter= $chaptersManager -> getChapter($id_chapter);
 		$comments = $commentManager -> getComments($id_chapter);
 
+		$previousChapter = $chaptersManager -> getChapter($id_chapter-1);
+		$nextChapter = $chaptersManager -> getChapter($id_chapter+1);
+
 		if($chapter['online'] == 1)
 		{
+			
 	   		require('view/frontend/bookView.php');
 	   	} else
 	   	{
@@ -164,7 +168,7 @@
 	        throw new Exception('Impossible de signaler le commentaire !');
 	    }
 	    else {
-	        header('Location:index.php?action=chapter&id_chapter='.$id_chapter);
+	        header('Location:index.php?action=chapter&id_chapter='.$id_chapter.'#commentaires');
 	    }
 
 	}

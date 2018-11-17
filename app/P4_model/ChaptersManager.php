@@ -8,7 +8,7 @@
         public function getChapters($start, $end)
         {
             $db = $this->dbConnect();
-            $req = $db->query('SELECT id, title, SUBSTRING_INDEX(content,\' \', 50) AS excerpt, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr, online FROM posts ORDER BY id LIMIT '.$start.','.$end);
+            $req = $db->query('SELECT id, title, SUBSTRING_INDEX(content,\' \', 50) AS excerpt, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr, online, is_delete FROM posts WHERE is_delete=0 ORDER BY id LIMIT '.$start.','.$end);
 
             return $req;
         }
@@ -24,7 +24,7 @@
         public function getChapter($postId)
         {
             $db = $this->dbConnect();
-            $req = $db->prepare('SELECT id, title, content, online, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr FROM posts WHERE id = ?');
+            $req = $db->prepare('SELECT id, title, content, online, is_delete, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr FROM posts WHERE id = ?');
             $req->execute(array($postId));
             $post = $req->fetch();
 
@@ -33,7 +33,7 @@
 
         public function newChapter($title, $content){
             $db = $this->dbConnect();
-            $posts = $db->prepare('INSERT INTO posts(author, title, content, creation_date, online) VALUES(\'admin\', ?, ?, NOW(), 1)');
+            $posts = $db->prepare('INSERT INTO posts(author, title, content, creation_date, online, is_delete) VALUES(\'admin\', ?, ?, NOW(), 1, 0)');
             $affectedLines = $posts->execute(array($title, $content));
 
             return $affectedLines;
@@ -51,10 +51,10 @@
             return $req;
         }
 
-        public function deleteFOChapter($postId)
+        public function softDeleteChapter($postId)
         {
             $db = $this->dbConnect();
-            $chapter = $db->prepare('DELETE FROM posts WHERE id=:id');
+            $chapter = $db->prepare('UPDATE posts SET is_delete=1, online=0 WHERE id=:id');
             $affectedLines = $chapter->execute(array(
                     'id'=>$postId
                 ));

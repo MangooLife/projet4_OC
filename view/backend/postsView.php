@@ -31,9 +31,10 @@
 		  	</thead>
 			<tbody>
 
-		<?php while($chapter = $chapters->fetch())
-				{
-					switch ($chapter['online'])
+		<?php 
+			while($chapter = $chapters->fetch())
+			{
+				switch ($chapter['online'])
 					{
 						case 0:
 		?>
@@ -48,8 +49,7 @@
 							    <td>
 							      	<a href="index.php?action=repostChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
 							      	<a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary"><i class="fas fa-pen update"></i></a>
-							      	<!-- <a href="index.php?action=deleteChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> -->
-							      	<a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							      	<button class="btn btn-danger" onclick="myFunction()"><a id="softDeletePost"><i class="fas fa-trash-alt"></i></a></button>
 							    </td>
 						  	</tr>
 	  
@@ -68,41 +68,52 @@
 							    <td>
 							      	<a href="index.php?action=draftChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-light"><i class="fas fa-file-contract"></i></a>
 							      	<a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary update"><i class="fas fa-pen update"></i></a>
-							      	<!-- <a href="index.php?action=deleteChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a> -->
-							      	<a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							      	<button class="btn btn-danger" onclick="myFunction()"><a id="softDeletePost"><i class="fas fa-trash-alt"></i></a></button>
 							    </td>
 						  	</tr>
 	  	<?php
-	  						break;
-	  				}
+  						break;
+  					}
+  		?>
+  					<script>
+						function myFunction() {
+						    var msgConfirmation = confirm("Attention ! Voulez-vous vraiment supprimer ce chapitre ? ");
+						    if (msgConfirmation == true) {
+						        document.location.href="index.php?action=deleteChapter&id_chapter=<?=$chapter['id']?>";
+						    } 
+						}
+					</script>
+		<?php
 				}
 				$chapters->closeCursor();
 		?>
 			</tbody>
-			<div>
-			 	<ul class="pagination pagination-sm">
-			 		<?php 
-				 		for ($i=1; $i < $pagesTotal + 1; $i++) { 
-				 			if($_GET['page'] == $i)
-				 			{
-				 	?>
-								<li class="page-item disabled">
-									<a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>" tabindex="-1"><?=$i?></a>
-								</li>
-					<?php
-				 			} else 
-				 			{
-				 	?>
-				 				<li class="page-item"><a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>"><?=$i?></a></li>
-				 	<?php
-				 			}
-						}
-					?>
-			  	</ul>
-			</div>
 		</table>
+
+		<div>
+		 	<ul class="pagination pagination-sm">
+		 		<?php 
+			 		for ($i=1; $i < $pagesTotal + 1; $i++) { 
+			 			if($_GET['page'] == $i)
+			 			{
+			 	?>
+							<li class="page-item disabled">
+								<a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>" tabindex="-1"><?=$i?></a>
+							</li>
+				<?php
+			 			} else 
+			 			{
+			 	?>
+			 				<li class="page-item"><a class="page-link" href="index.php?action=chapterBO&amp;page=<?=$i?>"><?=$i?></a></li>
+			 	<?php
+			 			}
+					}
+				?>
+		  	</ul>
+		</div>
+
 	</section>
 
 <?php $content = ob_get_clean(); ?>
-	<script src="./public/js/postSection.js"></script>
+	
 <?php require('adminTemplate.php'); ?>

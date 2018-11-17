@@ -4,7 +4,7 @@
 <?php ob_start(); ?>
 
 	<section class='story'>
-		<h1>Bienvenue sur votre espace administrateur</h1>
+		<h1>Gestion des commentaires</h1>
 
 		<h2>Les commentaires signalés </h2>
 
@@ -38,7 +38,8 @@
 				     	<a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
 				    </td>
 				    <td>
-				      	<?= htmlspecialchars($comment['comment_txt']) ?>
+				      	<?= htmlspecialchars($comment['comment_author']) ?><br/>
+						<?= htmlspecialchars($comment['comment_txt']) ?>
 				    </td>
 				     <td>
 				     	<a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
@@ -64,7 +65,7 @@
 				    	Article
 				    </th>
 				    <th scope="col">
-				      	Commentaire
+				      	Auteur / Commentaire
 				    </th>
 				   	<th scope="col">
 				      	Options
@@ -75,27 +76,27 @@
 
 		<?php 	while($comment = $allComments->fetch())
 				{	
-					switch ($comment['comment_management']) 
+					if($comment['comment_valid']==1) 
 					{
-						case 1:
 		?>
-							<tr class="scale-up-ver-center bg-success">
-							    <td class="font-weight-bold">
-							      	<?= $comment['comment_date'] ?>
-							    </td>
-							    <td class="lien_tab">
-							      	<a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
-							    </td>
-							    <td>
-							      	<?= htmlspecialchars($comment['comment_txt']) ?>
-							    </td>
-							    <td>
-							      	<a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-							    </td>
-						  	</tr>
+						<tr class="scale-up-ver-center bg-success">
+						    <td class="font-weight-bold">
+						      	<?= $comment['comment_date'] ?>
+						    </td>
+						    <td class="lien_tab">
+						      	<a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
+						    </td>
+						    <td>
+						      	<?= htmlspecialchars($comment['comment_author']) ?><br/>
+						      	<?= htmlspecialchars($comment['comment_txt']) ?>
+						    </td>
+						    <td>
+						      	<a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+						    </td>
+					  	</tr>
 		<?php					
-							break;
-						case 2:
+					} else if($comment['comment_hide']==1)
+					{
 		?>
 							<tr class="scale-up-ver-center bg-warning">
 							    <td class="font-weight-bold">
@@ -105,6 +106,7 @@
 							      	<a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
 							    </td>
 							    <td>
+							      	<?= htmlspecialchars($comment['comment_author']) ?><br/>
 							      	<?= htmlspecialchars($comment['comment_txt']) ?>
 							    </td>
 							    <td>
@@ -112,24 +114,25 @@
 							    </td>
 							 </tr>
 		<?php
-							break;
-						default: 
+					} else
+					{
 		?>
-							<tr class="scale-up-ver-center">
-							    <td class="font-weight-bold">
-							      	<?= $comment['comment_date'] ?>
-							    </td>
-							    <td class="lien_tab">
-							      	<a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
-							    </td>
-							    <td>
-							      	<?= htmlspecialchars($comment['comment_txt']) ?>
-							    </td>
-							    <td>
-							      	<a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
-							      	<a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>						    
-							    </td>
-							 </tr>
+						<tr class="scale-up-ver-center">
+						    <td class="font-weight-bold">
+						      	<?= $comment['comment_date'] ?>
+						    </td>
+						    <td class="lien_tab">
+						      	<a href="index.php?action=chapter&id_chapter=<?= $comment['posts_id'] ?>"><?= htmlspecialchars($comment['posts_title']) ?></a>
+						    </td>
+						    <td>
+						      	<?= htmlspecialchars($comment['comment_author']) ?><br/>
+						      	<?= htmlspecialchars($comment['comment_txt']) ?>
+						    </td>
+						    <td>
+						      	<a href="index.php?action=valideComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
+						      	<a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>						    
+						    </td>
+						 </tr>
 		<?php
 	  				}
 				}

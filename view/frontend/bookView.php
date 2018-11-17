@@ -8,8 +8,46 @@
 				echo '<h1>' . strtoupper($chapter['title']) . '</h1>';
 				echo '<p>';
 				echo $chapter['content'];
-				echo '</p>'; 
+				echo '</p>';
 			?>
+
+			<div class="container">
+			  	<div class="row">
+			    	<div class="col-sm">
+			    	 	<?php	
+			    			if($previousChapter && $previousChapter['online']==1)
+		    				{
+			    	 	?>
+			    	 			<a href="index.php?action=chapter&amp;id_chapter=<?=$previousChapter['id']?>"><i class="fas fa-chevron-left"></i> Chapitre précédent</a>
+			    		<?php
+			    			} else 
+					    	{
+				    	?>
+				    			<!-- <a href="index.php?action=chapter&amp;id_chapter=<?=$chapter['id']-2?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a> -->
+				    	<?php 
+				    		}
+				    	?>
+			    	</div>
+			    	<div class="col-sm">
+			      		<a href="index.php?action=chapters">Retour aux chapitres</a>
+			    	</div>
+			    	<div class="col-sm">
+				    	<?php
+				    		if($nextChapter && $nextChapter['online']==1)
+				    		{
+				    	?>
+				      			<a href="index.php?action=chapter&amp;id_chapter=<?=$nextChapter['id']?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a>
+				    	<?php
+				    		} else
+				    		{
+				    	?>
+				    			<!-- <a href="index.php?action=chapter&amp;id_chapter=<?=$chapter['id']+2?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a> -->
+				    	<?php 
+				    		}
+				    	?>
+			    	</div>
+			  	</div>
+			</div>
 	</section>
 
 	<section class="comments" id='commentaires'>
@@ -49,36 +87,31 @@
 		    			</a>
 		    			</p>
 			<?php
-			    	} else 
+			    	} else if($comment['report'] == 1 && $comment['management'] == 0)
 			    	{
-			    		switch ($comment['management']) 
-			    		{
-			    			case '0':
 			?>
-			    				<p><span><?= htmlspecialchars($comment['author'])?></span> 
-				    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-eye'></i> :
-				    			</p>
-					    		<p><?= htmlspecialchars($comment['comment'])?></p>
+	    				<p><span><?= htmlspecialchars($comment['author'])?></span> 
+		    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-eye'></i> :
+		    			</p>
+			    		<p><?= htmlspecialchars($comment['comment'])?></p>
 					    		
 			<?php
-			    				break;
-			    			case '1':
+			    	} else if($comment['is_valid'] == 1)
+			    	{
 			?>
-			    				<p><span> <?= htmlspecialchars($comment['author'])?></span> 
-				    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-check-circle'></i> : 
-				    			</p>
-					    		<p><?= htmlspecialchars($comment['comment'])?></p>
+	    				<p><span> <?= htmlspecialchars($comment['author'])?></span> 
+		    				a écrit le <?= $comment['comment_date_fr']?> <i class='fas fa-check-circle'></i> : 
+		    			</p>
+			    		<p><?= htmlspecialchars($comment['comment'])?></p>
 			<?php
-			    				break;
-			    			case '2':
+			    	} else if($comment['is_hide'] == 1)
+			    	{
 			?>
-			    				<p><span><?= htmlspecialchars($comment['author'])?></span> 
-				    				a écrit le <?= $comment['comment_date_fr']?> : 
-				    			</p>
-					    		<p><i class='fas fa-lock'></i> Commentaire supprimé.</p>
+	    				<p><span><?= htmlspecialchars($comment['author'])?></span> 
+		    				a écrit le <?= $comment['comment_date_fr']?> : 
+		    			</p>
+			    		<p><i class='fas fa-lock'></i> Commentaire supprimé.</p>
 			<?php
-			    				break;
-			    		}
 			    	}
 			    	echo '<hr/>';
 			    }

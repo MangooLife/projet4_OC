@@ -70,7 +70,7 @@
 	function deleteChapter($id_chapter)
 	{
 		$chaptersManager = new \app\P4_model\ChaptersManager();
-		$chapters= $chaptersManager -> deleteFOChapter($id_chapter);
+		$chapters= $chaptersManager -> softDeleteChapter($id_chapter);
 
 	    if ($chapters === false) {
 	        throw new Exception('Impossible de supprimer le chapitre !');
@@ -111,7 +111,6 @@
 		$commentManager = new \app\P4_model\CommentManager();
 
 	    $affectedLines = $commentManager->hideComment($id_comment);
-	    $affectedLines = $commentManager->checkedComment($id_comment);
 
 	    if ($affectedLines === false) {
 	        throw new Exception('Impossible de supprimer le commentaire !');
@@ -126,7 +125,6 @@
 		$commentManager = new \app\P4_model\CommentManager();
 
 	    $affectedLines = $commentManager->validComment($id_comment);
-	    $affectedLines = $commentManager->checkedComment($id_comment);
 
 	    if ($affectedLines === false) {
 	        throw new Exception('Impossible de valider le commentaire !');
