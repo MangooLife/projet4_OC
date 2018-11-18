@@ -5,6 +5,7 @@
 
 	<section class='story'>
 			<?php 
+				echo $lastChapter['id'];
 				echo '<h1>' . strtoupper($chapter['title']) . '</h1>';
 				echo '<p>';
 				echo $chapter['content'];
@@ -15,35 +16,25 @@
 			  	<div class="row">
 			    	<div class="col-sm">
 			    	 	<?php	
-			    			if($previousChapter && $previousChapter['online']==1)
+			    			if($previousChapter)
 		    				{
 			    	 	?>
 			    	 			<a href="index.php?action=chapter&amp;id_chapter=<?=$previousChapter['id']?>"><i class="fas fa-chevron-left"></i> Chapitre précédent</a>
 			    		<?php
-			    			} else 
-					    	{
-				    	?>
-				    			<!-- <a href="index.php?action=chapter&amp;id_chapter=<?=$chapter['id']-2?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a> -->
-				    	<?php 
-				    		}
-				    	?>
+			    			}
+			    		?>
 			    	</div>
 			    	<div class="col-sm">
 			      		<a href="index.php?action=chapters">Retour aux chapitres</a>
 			    	</div>
 			    	<div class="col-sm">
 				    	<?php
-				    		if($nextChapter && $nextChapter['online']==1)
+				    		if($nextChapter)
 				    		{
 				    	?>
 				      			<a href="index.php?action=chapter&amp;id_chapter=<?=$nextChapter['id']?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a>
 				    	<?php
-				    		} else
-				    		{
-				    	?>
-				    			<!-- <a href="index.php?action=chapter&amp;id_chapter=<?=$chapter['id']+2?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a> -->
-				    	<?php 
-				    		}
+				    		} 
 				    	?>
 			    	</div>
 			  	</div>

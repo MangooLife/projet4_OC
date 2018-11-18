@@ -11,14 +11,12 @@ PostSection.prototype = {
 	init: function() {
 		this.ajoutPostElt = document.querySelector(".ajoutPost");
 		this.annulerPostElt = document.querySelector(".annuler");
-		this.updatePostElt = document.querySelector(".update");
 		this.action();
 	},
 
 	action: function(){
 		this.showPostEdit();
 		this.hidePostEdit();
-		this.updatePostEdit();
 	},
 
 	showPostEdit: function(){

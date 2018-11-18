@@ -31,6 +31,15 @@
             return $post;
         }
 
+        public function getLastChapter()
+        {
+            $db = $this->dbConnect();
+            $req = $db->query('SELECT id FROM posts WHERE online=1 ORDER BY id DESC LIMIT 1');
+            $post = $req->fetch();
+
+            return $post;
+        }
+
         public function newChapter($title, $content){
             $db = $this->dbConnect();
             $posts = $db->prepare('INSERT INTO posts(author, title, content, creation_date, online, is_delete) VALUES(\'admin\', ?, ?, NOW(), 1, 0)');

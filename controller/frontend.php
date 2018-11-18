@@ -130,9 +130,21 @@
 
 		$chapter= $chaptersManager -> getChapter($id_chapter);
 		$comments = $commentManager -> getComments($id_chapter);
+		$lastChapter = $chaptersManager -> getLastChapter();
 
 		$previousChapter = $chaptersManager -> getChapter($id_chapter-1);
+		$totalPrevious = $id_chapter;
+		for ($i=1; ($previousChapter == false  || $previousChapter['online']==0)&&$totalPrevious > 0; $i++) { 
+			$totalPrevious = $id_chapter-$i;
+			$previousChapter = $chaptersManager -> getChapter($totalPrevious);
+		}
+
 		$nextChapter = $chaptersManager -> getChapter($id_chapter+1);
+		$totalNext = $id_chapter;
+		for ($i=1; ($nextChapter == false || $nextChapter['online'] == 0) && $totalNext < $lastChapter['id']; $i++) { 
+			$totalNext = $id_chapter+$i;
+			$nextChapter = $chaptersManager -> getChapter($totalNext);
+		}
 
 		if($chapter['online'] == 1)
 		{

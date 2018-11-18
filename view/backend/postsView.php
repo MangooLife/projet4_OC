@@ -35,7 +35,7 @@
 			while($chapter = $chapters->fetch())
 			{
 				switch ($chapter['online'])
-					{
+				{
 						case 0:
 		?>
 							<tr class="scale-up-ver-center bg-warning">
@@ -49,7 +49,7 @@
 							    <td>
 							      	<a href="index.php?action=repostChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-success"><i class="fas fa-check-square"></i></a>
 							      	<a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary"><i class="fas fa-pen update"></i></a>
-							      	<button class="btn btn-danger" onclick="myFunction()"><a id="softDeletePost"><i class="fas fa-trash-alt"></i></a></button>
+							      	<button class="btn btn-danger" onclick="softDeleteFunction(<?= $chapter['id'] ?>,'<?= $chapter['title'] ?>')"><a id="softDeletePost"><i class="fas fa-trash-alt"></i></a></button>
 							    </td>
 						  	</tr>
 	  
@@ -68,24 +68,24 @@
 							    <td>
 							      	<a href="index.php?action=draftChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-light"><i class="fas fa-file-contract"></i></a>
 							      	<a href="index.php?action=updateChapter&amp;id_chapter=<?=$chapter['id']?>" class="btn btn-primary update"><i class="fas fa-pen update"></i></a>
-							      	<button class="btn btn-danger" onclick="myFunction()"><a id="softDeletePost"><i class="fas fa-trash-alt"></i></a></button>
+							      	<button class="btn btn-danger" onclick="softDeleteFunction(<?= $chapter['id'] ?>,'<?= $chapter['title'] ?>')"><a id="softDeletePost"><i class="fas fa-trash-alt"></i></a></button>
 							    </td>
 						  	</tr>
 	  	<?php
   						break;
-  					}
+  				}
   		?>
   					<script>
-						function myFunction() {
-						    var msgConfirmation = confirm("Attention ! Voulez-vous vraiment supprimer ce chapitre ? ");
+						function softDeleteFunction(numChapter, titleChapter) {
+						    var msgConfirmation = confirm("Attention ! Voulez-vous vraiment supprimer ce chapitre "+titleChapter);
 						    if (msgConfirmation == true) {
-						        document.location.href="index.php?action=deleteChapter&id_chapter=<?=$chapter['id']?>";
+						        document.location.href="index.php?action=deleteChapter&id_chapter="+numChapter;
 						    } 
 						}
 					</script>
 		<?php
-				}
-				$chapters->closeCursor();
+			}
+			$chapters->closeCursor();
 		?>
 			</tbody>
 		</table>
@@ -115,5 +115,5 @@
 	</section>
 
 <?php $content = ob_get_clean(); ?>
-	
+	<script src="./public/js/postSection.js"></script>
 <?php require('adminTemplate.php'); ?>
