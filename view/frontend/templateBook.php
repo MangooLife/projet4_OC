@@ -35,7 +35,7 @@
     			<?php if(isset($_SESSION['pseudo'])) 
 			  		{
 			  	?>
-			  		<span class="navbar-brand mb-0 h1"><a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a> | Bienvenue <?= $_SESSION['pseudo']?></span>
+			  		<span class="navbar-brand mb-0 h1"><a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a><span class='helloMsgResponsive'> | Bienvenue <?= $_SESSION['pseudo']?></span></span>
 				<?php
 					} else
 					{
@@ -53,7 +53,7 @@
 				  		{
 				  	?>
 				  		<li class="nav-item">
-				  			<a class="navbar-brand" href="index.php?action=admin" title="BackOffice"><i class="fas fa-window-maximize"></i></a>
+				  			<a class="navbar-brand" href="index.php?action=admin" title="Backend"><i class="fas fa-window-maximize"></i></a>
 				  		</li>
 				  	<?php
 				  		}
@@ -69,7 +69,7 @@
 						{
 					?>
 							<li class="nav-item">
-					  			<a class="navbar-brand" href="index.php?action=connexion" title="Se connecter><i class="fas fa-power-off off"></i></a>
+					  			<a class="navbar-brand" href="index.php?action=connexion" title="Se connecter"><i class="fas fa-power-off off"></i></a>
 							</li>
 					<?php 
 						}

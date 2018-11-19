@@ -156,6 +156,7 @@ body > footer{
 	color: white;
 	padding: 35px;
 	display: flex;
+	flex-wrap: wrap;
  	width: 100%;
 }
 
@@ -164,7 +165,7 @@ footer > div{
 }
 
 .infoAuthor{
-	width: 50%;
+	width: 40%;
 }
 
 .infoSite{
@@ -442,4 +443,179 @@ a.retour{
     content: attr(data-label);
     float: left;
   }
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1445px to 1920px
+*/
+
+/*@media (min-width: 1445px) and (max-width: 1920px) {
+
+  
+}*/
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+/*@media (min-width: 1025px) and (max-width: 1280px) {
+  
+ 
+  
+}*/
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+	.infoCover{
+		margin: auto 15%;
+		margin-top: 10%;
+	}
+
+	.story{
+		margin: auto 0%;
+	}	
+
+	.comments{
+		margin: auto 0%;
+	}
+
+	.connexionPage{
+		margin: auto 0%;
+		width: 100%;
+		height: 50%;
+	}
+
+	.connexion{
+	padding: 10px;
+	}
+
+	.registration{
+		padding: 10px;
+	}
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+
+	.infoCover{
+		margin: auto 15%;
+		margin-top: 10%;
+	}
+
+	.story{
+		margin: auto 0%;
+	}
+
+	.comments{
+		margin: auto 0%;
+	}
+
+	.listComments{
+		width: 80%;
+	}
+
+	.connexionPage{
+		margin: auto 0%;
+		width: 100%;
+		height: 50%;
+	}
+
+	.connexion{
+	padding: 10px;
+	}
+
+	.registration{
+		padding: 10px;
+	}
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+	.infoCover{
+		margin: auto 15%;
+		margin-top: 10%;
+	}
+
+	.story{
+		margin: auto 0%;
+	}
+
+	.comments{
+		margin: auto 0%;
+	}
+
+	.listComments{
+		width: 80%;
+	}
+
+	.connexionPage{
+		margin: auto 0%;
+		width: 100%;
+		height: 50%;
+	}
+
+	.connexion{
+	padding: 10px;
+	}
+
+	.registration{
+		padding: 10px;
+	}
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+	.infoCover{
+		margin: auto 15%;
+		margin-top: 10%;
+	}
+
+	.story{
+		margin: auto -1%;
+	}
+
+	.comments{
+		margin: auto 0%;
+	}
+
+	.listComments{
+		width: 80%;
+	}
+
+	.connexionPage{
+		margin: auto 0%;
+		width: 100%;
+		height: 50%;
+	}
+
+	.connexion{
+	padding: 10px;
+	}
+
+	.registration{
+		padding: 10px;
+	}
+
+	.helloMsgResponsive{
+		display: inherit;
+	}
 }
