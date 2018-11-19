@@ -210,12 +210,12 @@ header{
 .navbar-brand{
 	font-weight: bold !important;
 }
-.buttonsHeader{
-	display: inline-block;
+.nav-item {
+	margin-right: 30px;
 }
 
-.buttonsHeader > a{
-	padding: 10px;
+.nav{
+	align-items:center;
 }
 
 /*

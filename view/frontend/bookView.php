@@ -5,7 +5,6 @@
 
 	<section class='story'>
 			<?php 
-				echo $lastChapter['id'];
 				echo '<h1>' . strtoupper($chapter['title']) . '</h1>';
 				echo '<p>';
 				echo $chapter['content'];

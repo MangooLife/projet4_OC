@@ -26,19 +26,22 @@
 				$affectedMember = $connexionManager -> registrationMember($pseudo_reg, $mail_reg, $mdp_reg);
 
 				if ($affectedMember === false) {
-			        throw new Exception('Impossible d\'ajouter le membre. Il est possible que le pseudo ou l\'email existe déjà');
+			        $_SESSION['flashMsg'] = 'Impossible d\'ajouter le membre. Il est possible que le pseudo ou l\'email existe déjà';
+			        header('Location:index.php?action=connexion');
 			    }
 			    else {
-			    	$successMsg = "Vous êtes bien inscrit. Veuillez vous connecter pour profiter pleinement de la section commentaire.";
+			    	$_SESSION['flashMsg'] = "Vous êtes bien inscrit. Vous pouvez désormais profiter de la section commentaire.";
 			        login($pseudo_reg, $mdp_reg);
 			    }
 			} else
 			{
-				throw new Exception('Votre mot de passe n\'est pas assez fort. Il faut au moins 6 caractères.');
+				$_SESSION['flashMsg'] = 'Votre mot de passe n\'est pas assez fort. Il faut au moins 6 caractères.';
+				header('Location:index.php?action=connexion');
 			}
 		} else
 		{
-			throw new Exception('Votre pseudo n\'est pas assez long. Il faut au moins 6 caractères.');
+			$_SESSION['flashMsg'] = 'Votre pseudo n\'est pas assez long. Il faut au moins 6 caractères.';
+			header('Location:index.php?action=connexion');
 		}
 	}
 
@@ -50,7 +53,8 @@
 
 		if ($loginMember === false)
 		{
-		    throw new Exception('Impossible de se connecter. Veuillez vérifier votre pseudo ou mot de passe.');
+		    $_SESSION['flashMsg'] = 'Impossible de se connecter. Veuillez vérifier votre pseudo ou mot de passe.';
+			header('Location:index.php?action=connexion');
 		}
 		else
 		{
@@ -72,7 +76,8 @@
 			    }
 		    }
 		    else {
-		        throw new Exception('Le mot de passe est incorrect');
+		        $_SESSION['flashMsg'] = 'Le mot de passe est incorrect.';
+		        header('Location:index.php?action=connexion');
 		    }
 		}
 	}

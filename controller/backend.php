@@ -47,10 +47,12 @@
 
 		if($changeChapterLine)
 		{
+			$_SESSION['flashMsg'] = 'Ce chapitre a pu être modifié.';
 	   		require('view/backend/updatePostsView.php');
 	   	} else
 	   	{
-	   		throw new Exception('Ce chapitre n\'a pas pu être modifié');
+	   		$_SESSION['flashMsg'] = 'Ce chapitre n\'a pas pu être modifié';
+	   		require('view/backend/updatePostsView.php');
 	   	}
 	}
 
@@ -60,9 +62,11 @@
 		$chapters= $chaptersManager -> newChapter($title, $content);
 
 	    if ($chapters === false) {
-	        throw new Exception('Impossible d\'ajouter le chapitre !');
+	        $_SESSION['flashMsg'] = 'Impossible d\'ajouter le chapitre !';
+	        header('Location:index.php?action=chapterBO');
 	    }
 	    else {
+	    	$_SESSION['flashMsg'] = 'Le chapitre a bien été ajouté';
 	        header('Location:index.php?action=chapterBO');
 	    }
 	}
@@ -73,9 +77,11 @@
 		$chapters= $chaptersManager -> softDeleteChapter($id_chapter);
 
 	    if ($chapters === false) {
-	        throw new Exception('Impossible de supprimer le chapitre !');
+	        $_SESSION['flashMsg'] = 'Impossible de supprimer le chapitre !';
+	        header('Location:index.php?action=chapterBO');
 	    }
 	    else {
+	    	$_SESSION['flashMsg'] = 'Le chapitre a bien été supprimé';
 	        header('Location:index.php?action=chapterBO');
 	    }
 	}
@@ -86,9 +92,11 @@
 		$chapters= $chaptersManager -> hideChapter($id_chapter);
 
 	    if ($chapters === false) {
-	        throw new Exception('Impossible de mettre le chapitre en brouillon !');
+	        $_SESSION['flashMsg'] = 'Impossible de mettre le chapitre en brouillon !';
+	        header('Location:index.php?action=chapterBO');
 	    }
 	    else {
+	    	$_SESSION['flashMsg'] = 'Le chapitre a bien été ajouté en brouillon';
 	        header('Location:index.php?action=chapterBO');
 	    }
 	}
@@ -99,9 +107,11 @@
 		$chapters= $chaptersManager -> validateChapter($id_chapter);
 
 	    if ($chapters === false) {
-	        throw new Exception('Impossible de mettre en ligne le chapitre !');
+	        $_SESSION['flashMsg'] = 'Impossible de mettre en ligne le chapitre !';
+	        header('Location:index.php?action=chapterBO');
 	    }
 	    else {
+	    	$_SESSION['flashMsg'] = 'Le chapitre a bien été reposté';
 	        header('Location:index.php?action=chapterBO');
 	    }
 	}
@@ -113,9 +123,11 @@
 	    $affectedLines = $commentManager->hideComment($id_comment);
 
 	    if ($affectedLines === false) {
-	        throw new Exception('Impossible de supprimer le commentaire !');
+	        $_SESSION['flashMsg'] = 'Impossible de supprimer le commentaire !';
+	        header('Location:index.php?action=admin');
 	    }
 	    else {
+	    	$_SESSION['flashMsg'] = 'Le commentaire a bien été supprimé';
 	        header('Location:index.php?action=admin');
 	    }
 	}
@@ -127,9 +139,11 @@
 	    $affectedLines = $commentManager->validComment($id_comment);
 
 	    if ($affectedLines === false) {
-	        throw new Exception('Impossible de valider le commentaire !');
+	        $_SESSION['flashMsg'] = 'Impossible de valider le commentaire !';
+	        header('Location:index.php?action=admin');
 	    }
 	    else {
+	    	$_SESSION['flashMsg'] = 'Le commentaire a bien été validé';
 	        header('Location:index.php?action=admin');
 	    }
 	}

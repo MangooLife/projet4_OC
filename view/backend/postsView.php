@@ -6,6 +6,20 @@
 	<section class='story'>
 		<h1>Gestion de mes chapitres</h1>
 
+		<?php 
+			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
+			{
+		?>
+				<div class="alert alert-info" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsg'];
+							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			}
+		?>
+
 		<p class='ajoutPost'><button><i class="fas fa-plus"></i> Ajouter un chapitre</button></p>
 
 		<form class='formPost' action='index.php?action=createChapter' method='POST'>

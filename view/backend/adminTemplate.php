@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    <head lang="fr">
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <link rel="icon" type="image/png" href="#" sizes="32x32" />
@@ -21,7 +21,8 @@
                 <?php if(isset($_SESSION['pseudo'])) 
                     {
                 ?>
-                    <a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i> | Bienvenue <?= $_SESSION['pseudo']?></a> 
+                     <span class="navbar-brand mb-0 h1"><a class="navbar-brand" href="index.php?action=cover">Billet simple pour l'Alaska <i class="fas fa-feather-alt"></i></a> | Bienvenue <?= $_SESSION['pseudo']?></span>
+
                 <?php
                     } else
                     {
@@ -30,24 +31,33 @@
                 <?php 
                     }
                 ?>
-                <span class="buttonsHeader">
-                    <a class="navbar-brand" href="index.php?action=chapters"><i class="fas fa-book"></i></a>
-                    <a class="navbar-brand" href="index.php?action=chapters"><i class="far fa-window-maximize"></i></a>
-                    <a class="navbar-brand" href="index.php?action=admin"><i class="fas fa-comments"></i></a>
-                    <a class="navbar-brand" href="index.php?action=chapterBO"><i class="fas fa-edit"></i></a>
+                <ul class="nav justify-content-end">
+                   <li class="nav-item">
+                        <a class="navbar-brand" href="index.php?action=chapters" title="FrontOffice"><i class="far fa-window-maximize"></i></a>
+                    </li>
+                    <li class="nav-item">   
+                        <a class="navbar-brand" href="index.php?action=admin" title="Gérer mes commentaires"><i class="fas fa-comments"></i></a>
+                    </li>
+                    <li class="nav-item">   
+                        <a class="navbar-brand" href="index.php?action=chapterBO" title="Gérer mes chapitres"><i class="fas fa-edit"></i></a>
+                    </li>
                     <?php if(isset($_SESSION['pseudo'])) 
                         {
                     ?>
-                        <a class="navbar-brand" href="index.php?action=logout"><i class="fas fa-power-off on"></i></a>
+                            <li class="nav-item">
+                                <a class="navbar-brand" href="index.php?action=logout" title="Se déconnecter"><i class="fas fa-power-off on"></i></a>
+                            </li>
                     <?php
                         } else
                         {
                     ?>
-                        <a class="navbar-brand" href="index.php?action=connexion"><i class="fas fa-power-off off"></i></a>
+                            <li class="nav-item">
+                                <a class="navbar-brand" href="index.php?action=connexion" title="Se connecter"><i class="fas fa-power-off off"></i></a>
+                            </li>
                     <?php 
                         }
                     ?>
-                </span>
+                </ul>
             </nav>
         </header>
 

@@ -6,6 +6,20 @@
 	<section class='story'>
 		<h1>Gestion des commentaires</h1>
 
+		<?php 
+			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
+			{
+		?>
+				<div class="alert alert-info" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsg'];
+							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			}
+		?>
+
 		<h2>Les commentaires signalés </h2>
 
 		<table class="table table-striped table-dark">

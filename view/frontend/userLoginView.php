@@ -1,16 +1,31 @@
+<?php require './app/widget/Form.php' ?>
 <?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
 
 <?php ob_start(); ?>
 	
 	<section class='connexionPage'>
 		<h1>Connexion à mon espace <i class="fas fa-user-circle"></i></h1>
+		<?php 
+			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
+			{
+		?>
+				<div class="alert alert-warning" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsg'];
+							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			}
+			$form =new \app\widget\Form();
+		?>
 		<div class='formConnexion'>
 			<div class='connexion'>
 				<h2>Connexion</h2>
-				<form action='index.php?action=login' method='POST'>	
-					<label for='pseudo'>Pseudo<br/><input type='text' id='pseudo' name='pseudo' required/></label><br/>
-					<label for='mdp'>Mot de passe<br/><input type='password' id='mdp' name='mdp' required/></label><br/>
-					<input type='submit' value='Connexion'/>
+				<form action='index.php?action=login' method='POST'>
+					<?php echo $form->input('Pseudo','text','pseudo'); ?>
+					<?php echo $form->input('Mot de passe','password','mdp'); ?>
+					<?php echo $form->submit('Connexion'); ?>
 				</form>
 				<hr/>
 				<a class="retour" href="index.php?action=covers"><i class="fas fa-arrow-circle-left"></i> Retour résumé</a><br/>
@@ -18,22 +33,12 @@
 			</div>
 			<div class='registration'>
 				<h2>Inscription</h2>
-				<form action='index.php?action=registration' method='POST'>	
-					<label for='mail_reg'>Mail<br/><input type='email' id='mail_reg' name='mail_reg' placeholder='user@monmail.com' required/></label><br/>
-					<label for='pseudo_reg'>Pseudo<br/><input type='text' id='pseudo_reg' name='pseudo_reg' placeholder='Min 6 caractères' required/></label><br/>
-					<label for='mdp_reg'>Mot de passe<br/><input type='password' id='mdp_reg' name='mdp_reg' placeholder='Min 6 caractères' required/></label><br/>
-					<input type='submit' value='Inscription'/>
+				<form action='index.php?action=registration' method='POST'>
+					<?php echo $form->input('Mail','email','mail_reg',' johnDOE@mail.com'); ?>
+					<?php echo $form->input('Pseudo','text','pseudo_reg', ' 6 caractères et plus'); ?>
+					<?php echo $form->input('Mot de passe','password','mdp_reg', ' 6 caractères et plus'); ?>
+					<?php echo $form->submit('Inscription'); ?>	
 				</form>
-				<?php 
-					if(!empty($successMsg))
-					{
-				?>
-						<div class="alert alert-secondary" role="alert">
-						  <?php echo $successMsg; ?>
-						</div>
-				<?php
-					}
-				?>
 			</div>
 		</div>
 	</section>

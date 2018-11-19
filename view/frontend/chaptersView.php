@@ -4,6 +4,19 @@
 <?php ob_start(); ?>
 
    	<section class='story'>
+   		<?php 
+			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
+			{
+		?>
+				<div class="alert alert-success" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsg'];
+							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			}
+		?>
     	<h1>CHAPITRES</h1>
 		<?php 
 			while($chapter = $chapters -> fetch())
