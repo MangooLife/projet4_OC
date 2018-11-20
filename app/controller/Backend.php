@@ -38,7 +38,8 @@
 		   		require('view/backend/updatePostsView.php');
 		   	} else
 		   	{
-		   		throw new Exception('Ce chapitre n\'existe pas.');
+		   		$_SESSION['flashMsgError'] = 'Ce chapitre n\'existe pas.';
+		        require('view/backend/updatePostsView.php');
 		   	}
 		}
 

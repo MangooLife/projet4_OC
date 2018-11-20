@@ -15,6 +15,16 @@
 					?>
 				</div>
 		<?php
+			} if(!empty($_SESSION['flashMsgError']) && isset($_SESSION['flashMsgError']))
+			{
+		?>
+				<div class="alert alert-danger" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsgError'];
+							unset($_SESSION['flashMsgError']);
+					?>
+				</div>
+		<?php
 			}
 		?>
 		<?php 

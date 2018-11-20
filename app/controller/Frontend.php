@@ -110,7 +110,8 @@
 				require('view/backend/adminView.php');
 			} else 
 			{
-				throw new Exception('Vous n\'êtes pas autorisé à accéder à cette partie du site');
+				$_SESSION['flashMsgError'] = 'Vous n\'êtes pas autorisé à accéder à cette partie du site';
+				header('Location:index.php?action=chapters&page=1');
 			}
 		}
 
@@ -173,8 +174,8 @@
 		   		require('view/frontend/bookView.php');
 		   	} else
 		   	{
-		   		throw new Exception('Ce chapitre n\'existe pas.');
-		   	}
+		   		$_SESSION['flashMsgError'] = 'Ce chapitre n\'existe pas.';
+		   		header('Location:index.php?action=chapters');		   	}
 		}
 
 		function comments($id_chapter, $author, $comment)
@@ -184,7 +185,8 @@
 		    $affectedLines = $commentManager->addComment($id_chapter, $author, $comment);
 
 		    if ($affectedLines === false) {
-		        throw new Exception('Impossible d\'ajouter le commentaire !');
+		    	$_SESSION['flashMsgError'] = 'Impossible d\'ajouter le commentaire !';
+		   		header('Location:index.php?action=chapter&id_chapter='.$id_chapter.'#commentaires');
 		    }
 		    else {
 		        header('Location:index.php?action=chapter&id_chapter='.$id_chapter.'#commentaires');
@@ -198,7 +200,8 @@
 		    $affectedLines = $commentManager->signalComment($id_comment);
 
 		    if ($affectedLines === false) {
-		        throw new Exception('Impossible de signaler le commentaire !');
+		    	$_SESSION['flashMsgError'] = 'Impossible de signaler le commentaire !';
+		        header('Location:index.php?action=chapter&id_chapter='.$id_chapter.'#commentaires');
 		    }
 		    else {
 		        header('Location:index.php?action=chapter&id_chapter='.$id_chapter.'#commentaires');
