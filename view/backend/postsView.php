@@ -1,4 +1,4 @@
-<?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
+<?php $title = "Backoffice gérer mes chapitres - Billet simple pour l'Alaska"; ?>
 <?php $bodyClass = "book"; ?>
 
 <?php ob_start(); ?>
@@ -10,10 +10,20 @@
 			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
 			{
 		?>
-				<div class="alert alert-info" role="alert">
+				<div class="alert alert-success" role="alert">
 					<?php 	
 							echo $_SESSION['flashMsg'];
 							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			} if(!empty($_SESSION['flashMsgError']) && isset($_SESSION['flashMsgError']))
+			{
+		?>
+				<div class="alert alert-danger" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsgError'];
+							unset($_SESSION['flashMsgError']);
 					?>
 				</div>
 		<?php

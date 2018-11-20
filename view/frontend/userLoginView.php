@@ -1,5 +1,5 @@
 <?php require './app/widget/Form.php' ?>
-<?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
+<?php $title = "Connexion à mon espace lecteur - Billet simple pour l'Alaska"; ?>
 
 <?php ob_start(); ?>
 	
@@ -28,7 +28,7 @@
 					<?php echo $form->submit('Connexion'); ?>
 				</form>
 				<hr/>
-				<a class="retour" href="index.php?action=covers"><i class="fas fa-arrow-circle-left"></i> Retour résumé</a><br/>
+				<a class="retour" href="index.php?action=covers"><i class="fas fa-arrow-circle-left"></i> Retour à l'accueil</a><br/>
 				<a class="retour" href="index.php?action=chapters&amp;page=1"><i class="fas fa-arrow-circle-left"></i> Retour aux chapitres</a>
 			</div>
 			<div class='registration'>

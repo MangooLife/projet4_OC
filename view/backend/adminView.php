@@ -1,4 +1,4 @@
-<?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
+<?php $title = "Backoffice gérer mes commentaires -Billet simple pour l'Alaska"; ?>
 <?php $bodyClass = "book"; ?>
 
 <?php ob_start(); ?>
@@ -10,10 +10,20 @@
 			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
 			{
 		?>
-				<div class="alert alert-info" role="alert">
+				<div class="alert alert-success" role="alert">
 					<?php 	
 							echo $_SESSION['flashMsg'];
 							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			} if(!empty($_SESSION['flashMsgError']) && isset($_SESSION['flashMsgError']))
+			{
+		?>
+				<div class="alert alert-danger" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsgError'];
+							unset($_SESSION['flashMsgError']);
 					?>
 				</div>
 		<?php
@@ -105,6 +115,7 @@
 						      	<?= htmlspecialchars($comment['comment_txt']) ?>
 						    </td>
 						    <td>
+						    	<a class="btn btn-success"><i class="fas fa-check"></i></i></a>
 						      	<a href="index.php?action=deleteComment&amp;id_comment=<?=$comment['comment_id']?>" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 						    </td>
 					  	</tr>
@@ -156,5 +167,6 @@
 		</table>
 	</section>
 
+<?php unset($_SESSION['lastUrl']);?>
 <?php $content = ob_get_clean(); ?>
 <?php require('adminTemplate.php'); ?>

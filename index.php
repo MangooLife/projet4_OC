@@ -1,7 +1,10 @@
 <?php
 	session_start();
-	require('controller/frontend.php');
-	require('controller/backend.php');
+	require('app/controller/Frontend.php');
+	require('app/controller/Backend.php');
+
+	$backend = new \app\controller\Backend();
+	$frontend = new \app\controller\Frontend();
 
 	try
 	{
@@ -13,12 +16,15 @@
 			switch ($action)
 			{
 				case 'cover':
-					cover();
+					$frontend->cover();
+					break;
+				case 'mentionsLegales':
+					$frontend->legalMentions();
 					break;
 				case 'chapters':
 					if(isset($_GET['page']) && $_GET['page'] > 0)
 					{
-						chapters($_GET['page']);
+						$frontend->chapters($_GET['page']);
 					} else 
 					{
 						header('Location:index.php?action=chapters&page=1');
@@ -27,7 +33,7 @@
 				case 'chapter':
 					if(isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0)
 					{
-						chapter($_GET['id_chapter']);
+						$frontend->chapter($_GET['id_chapter']);
 					} else 
 					{
 						throw new Exception('Ce chapitre n\'existe pas...');    	
@@ -38,7 +44,7 @@
 					{
 						if(isset($_GET['page']) && $_GET['page'] > 0)
 						{
-							chaptersBO($_GET['page']);
+							$backend->chaptersBO($_GET['page']);
 						} else 
 						{
 							header('Location:index.php?action=chapterBO&page=1');
@@ -53,7 +59,7 @@
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (!empty($_POST['title']) && !empty($_POST['content'])) {
-							createChapters($_POST['title'], $_POST['content']);
+							$backend->createChapters($_POST['title'], $_POST['content']);
 			            } else {
 			                throw new Exception('Le chapitre n\'a pas pu être supprimé');
 			            }	
@@ -67,7 +73,7 @@
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
-							getChapter( $_GET['id_chapter']);
+							$backend->getChapter( $_GET['id_chapter']);
 			            } else {
 			                throw new Exception('Le chapitre n\'a pas pu être chargé');
 			            }	
@@ -81,7 +87,7 @@
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_chapter']) && $_GET['id_chapter'] && !empty($_POST['title']) && !empty($_POST['content'])) {
-							changeChapter( $_GET['id_chapter'], $_POST['title'], $_POST['content']);
+							$backend->changeChapter( $_GET['id_chapter'], $_POST['title'], $_POST['content']);
 			            } else {
 			                throw new Exception('Le chapitre n\'a pas pu être changé');
 			            }	
@@ -95,7 +101,7 @@
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
-							deleteChapter($_GET['id_chapter']);
+							$backend->deleteChapter($_GET['id_chapter']);
 			            } else {
 			                throw new Exception('Le chapitre n\'a pas pu être supprimé');
 			            }	
@@ -109,7 +115,7 @@
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
-							draftChapter($_GET['id_chapter']);
+							$backend->draftChapter($_GET['id_chapter']);
 			            } else {
 			                throw new Exception('Le chapitre n\'a pas pu être mis en brouillon');
 			            }	
@@ -123,7 +129,7 @@
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_chapter']) && $_GET['id_chapter']) {
-							repostChapter($_GET['id_chapter']);
+							$backend->repostChapter($_GET['id_chapter']);
 			            } else {
 			                throw new Exception('Le chapitre n\'a pas pu être remis en ligne');
 			            }	
@@ -136,7 +142,7 @@
 				case 'addComment':
 					if (isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0) {
 		                if (!empty($_SESSION['pseudo']) && !empty($_SESSION['pseudo'])) {
-		                    comments($_GET['id_chapter'], $_SESSION['pseudo'], $_POST['comment']);
+		                    $frontend->comments($_GET['id_chapter'], $_SESSION['pseudo'], $_POST['comment']);
 		                } else {
 		                    throw new Exception('Tous les champs ne sont pas remplis !');
 		                }
@@ -148,7 +154,7 @@
 				case 'signalComment':
 					if (isset($_GET['id_chapter']) && $_GET['id_chapter'] > 0) {
 		                if (isset($_GET['id_comment']) && $_GET['id_comment']) {
-		                    signal($_GET['id_comment'], $_GET['id_chapter']);
+		                    $frontend->signal($_GET['id_comment'], $_GET['id_chapter']);
 		                } else {
 		                    throw new Exception('Une erreur s\'est glissée dans votre demande...');
 		                }
@@ -161,7 +167,7 @@
 			        if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_comment']) && $_GET['id_comment']) {
-			                deleteComment($_GET['id_comment']);
+			                $backend->deleteComment($_GET['id_comment']);
 			            } else {
 			                throw new Exception('Le commentaire n\'a pas pu être supprimé');
 			            }
@@ -175,7 +181,7 @@
 				    if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
 						if (isset($_GET['id_comment']) && $_GET['id_comment']) {
-			                validateComment($_GET['id_comment']);
+			                $backend->validateComment($_GET['id_comment']);
 			            } else {
 			                throw new Exception('Le commentaire n\'a pas pu être validé');
 			            }
@@ -188,7 +194,7 @@
 				case 'connexion':
 					if(!isset($_SESSION['pseudo']))
 					{
-						connexion();
+						$frontend->connexion();
 					} else 
 					{
 						header('Location:index.php?action=chapters');
@@ -197,7 +203,7 @@
 				case 'login':
 					if(!empty($_POST['pseudo']) && !empty($_POST['mdp']))
 					{
-						login($_POST['pseudo'], $_POST['mdp']);
+						$frontend->login($_POST['pseudo'], $_POST['mdp']);
 					}	
 					else
 					{
@@ -205,12 +211,12 @@
 					}
 					break;
 				case 'logout':
-					logout();
+					$frontend->logout();
 					break;
 				case 'registration':
 					if(!empty($_POST['pseudo_reg']) && !empty($_POST['mail_reg']) && !empty($_POST['mdp_reg']))
 					{
-						registration($_POST['pseudo_reg'], $_POST['mail_reg'], $_POST['mdp_reg']);
+						$frontend->registration($_POST['pseudo_reg'], $_POST['mail_reg'], $_POST['mdp_reg']);
 					}
 					else
 					{
@@ -220,7 +226,7 @@
 				case 'admin':
 					if(isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1)
 					{
-						admin($_SESSION['is_admin']);
+						$frontend->admin($_SESSION['is_admin']);
 					}
 					else
 					{
@@ -228,12 +234,12 @@
 					}
 					break;
 				default:
-					cover();
+					$frontend->cover();
 			}
 		}	
 		else
 		{
-			cover();
+			$frontend->cover();
 		}
 	} 
 	catch(Exception $e)

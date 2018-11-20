@@ -1,43 +1,56 @@
-<?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
+<?php $title = $chapter['title']." - Billet simple pour l'Alaska"; ?>
 <?php $bodyClass = "book"; ?>
 
 <?php ob_start(); ?>
 
 	<section class='story'>
-			<?php 
-				echo '<h1>' . strtoupper($chapter['title']) . '</h1>';
-				echo '<p>';
-				echo $chapter['content'];
-				echo '</p>';
-			?>
+		<?php 
+			if(!empty($_SESSION['flashMsg']) && isset($_SESSION['flashMsg']))
+			{
+		?>
+				<div class="alert alert-success" role="alert">
+					<?php 	
+							echo $_SESSION['flashMsg'];
+							unset($_SESSION['flashMsg']);
+					?>
+				</div>
+		<?php
+			}
+		?>
+		<?php 
+			echo '<h1>' . strtoupper($chapter['title']) . '</h1>';
+			echo '<p>';
+			echo $chapter['content'];
+			echo '</p>';
+		?>
 
-			<div class="container">
-			  	<div class="row">
-			    	<div class="col-sm">
-			    	 	<?php	
-			    			if($previousChapter)
-		    				{
-			    	 	?>
-			    	 			<a href="index.php?action=chapter&amp;id_chapter=<?=$previousChapter['id']?>"><i class="fas fa-chevron-left"></i> Chapitre précédent</a>
-			    		<?php
-			    			}
-			    		?>
-			    	</div>
-			    	<div class="col-sm">
-			      		<a href="index.php?action=chapters">Retour aux chapitres</a>
-			    	</div>
-			    	<div class="col-sm">
-				    	<?php
-				    		if($nextChapter)
-				    		{
-				    	?>
-				      			<a href="index.php?action=chapter&amp;id_chapter=<?=$nextChapter['id']?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a>
-				    	<?php
-				    		} 
-				    	?>
-			    	</div>
-			  	</div>
-			</div>
+		<div class="container">
+		  	<div class="row">
+		    	<div class="col-sm">
+		    	 	<?php	
+		    			if($previousChapter)
+	    				{
+		    	 	?>
+		    	 			<a href="index.php?action=chapter&amp;id_chapter=<?=$previousChapter['id']?>"><i class="fas fa-chevron-left"></i> Chapitre précédent</a>
+		    		<?php
+		    			}
+		    		?>
+		    	</div>
+		    	<div class="col-sm">
+		      		<a href="index.php?action=chapters">Retour aux chapitres</a>
+		    	</div>
+		    	<div class="col-sm">
+			    	<?php
+			    		if($nextChapter)
+			    		{
+			    	?>
+			      			<a href="index.php?action=chapter&amp;id_chapter=<?=$nextChapter['id']?>">Chapitre suivant <i class="fas fa-chevron-right"></i></a>
+			    	<?php
+			    		} 
+			    	?>
+		    	</div>
+		  	</div>
+		</div>
 	</section>
 
 	<section class="comments" id='commentaires'>
@@ -110,6 +123,7 @@
 		</div>
 	</section>
 
+<?php $_SESSION['lastUrl'] = $chapter['id'];?>
 <?php $content = ob_get_clean(); ?>
 	<script src="./public/js/commentSection.js"></script>
 	<script src="./public/js/main.js"></script>

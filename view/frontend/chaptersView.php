@@ -1,4 +1,4 @@
-<?php $title = "Billet simple pour l'Alaska - Un roman de Jean Forteroche"; ?>
+<?php $title = "Table des chapitres - Billet simple pour l'Alaska"; ?>
 <?php $bodyClass = "book"; ?>
 
 <?php ob_start(); ?>
@@ -57,7 +57,7 @@
 
 	</section>
 
-	
+<?php unset($_SESSION['lastUrl']);?>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('templateBook.php'); ?>

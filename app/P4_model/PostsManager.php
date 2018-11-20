@@ -8,7 +8,15 @@
         public function getChapters($start, $end)
         {
             $db = $this->dbConnect();
-            $req = $db->query('SELECT id, title, SUBSTRING_INDEX(content,\' \', 50) AS excerpt, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr, online, is_delete FROM posts WHERE is_delete=0 ORDER BY id LIMIT '.$start.','.$end);
+            $req = $db->query('SELECT id, title, SUBSTRING_INDEX(content,\' \', 50) AS excerpt, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr, online, is_delete FROM posts WHERE online=1 ORDER BY id LIMIT '.$start.','.$end);
+
+            return $req;
+        }
+
+        public function getChaptersDesc($start, $end)
+        {
+            $db = $this->dbConnect();
+            $req = $db->query('SELECT id, title, SUBSTRING_INDEX(content,\' \', 50) AS excerpt, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%i\') AS creation_date_fr, online, is_delete FROM posts WHERE is_delete=0 ORDER BY id DESC LIMIT '.$start.','.$end);
 
             return $req;
         }
