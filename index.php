@@ -61,7 +61,9 @@
 						if (!empty($_POST['title']) && !empty($_POST['content'])) {
 							$backend->createChapters($_POST['title'], $_POST['content']);
 			            } else {
-			                throw new Exception('Le chapitre n\'a pas pu être supprimé');
+
+		   					$_SESSION['flashMsgError'] = 'Ce chapitre n\'a pas pu être ajouté. Il manque du contenu.';
+		   					header('Location:index.php?action=chapterBO&page=1');
 			            }	
 			        }
 					else
