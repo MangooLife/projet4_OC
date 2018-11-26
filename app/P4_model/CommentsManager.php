@@ -3,7 +3,7 @@
 
 	require_once("app/P4_model/Manager.php");
 
-	class CommentManager extends Manager
+	class CommentsManager extends Manager
 	{
 		
 		public function getAllComments()

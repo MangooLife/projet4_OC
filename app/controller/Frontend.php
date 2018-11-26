@@ -23,7 +23,7 @@
 		}
 
 		function registration($pseudo_reg, $mail_reg, $mdp_reg){
-			$connexionManager = new \app\P4_model\ConnexionManager();
+			$connexionManager = new \app\P4_model\MembersManager();
 
 			$verificationPseudo = preg_match('#^.{6,}$#', $pseudo_reg);
 			$verificationPassword = preg_match_all('#^.{6,}$#', $mdp_reg);
@@ -55,7 +55,7 @@
 		}
 
 		function login($pseudo, $mdp){
-			$connexionManager = new \app\P4_model\ConnexionManager();
+			$connexionManager = new \app\P4_model\MembersManager();
 			$loginMember = $connexionManager -> connexionMember($pseudo);
 
 			$isPasswordCorrect = password_verify($mdp, $loginMember['password']);
@@ -103,7 +103,7 @@
 			if(isset($admin) && $admin == 1)
 			{
 
-				$commentManager = new \app\P4_model\CommentManager();
+				$commentManager = new \app\P4_model\CommentsManager();
 		    	$allSignalComments = $commentManager->getSignalComments();
 		    	$allComments = $commentManager->getAllComments();
 
@@ -128,7 +128,7 @@
 			// $chaptersManager = new \app\P4_model\ChaptersManager();
 			// $chapters= $chaptersManager -> getChapters();
 			$chapterPerPage = 4;
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 			$chaptersTotal = $chaptersManager -> getAllChapters();
 			$pagesTotal = ceil($chaptersTotal['total']/$chapterPerPage);
 
@@ -147,8 +147,8 @@
 
 		function chapter($id_chapter)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
-			$commentManager = new \app\P4_model\CommentManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
+			$commentManager = new \app\P4_model\CommentsManager();
 
 			$chapter= $chaptersManager -> getChapter($id_chapter);
 			$comments = $commentManager -> getComments($id_chapter);
@@ -180,7 +180,7 @@
 
 		function comments($id_chapter, $author, $comment)
 		{
-			$commentManager = new \app\P4_model\CommentManager();
+			$commentManager = new \app\P4_model\CommentsManager();
 
 		    $affectedLines = $commentManager->addComment($id_chapter, $author, $comment);
 
@@ -195,7 +195,7 @@
 
 		function signal($id_comment, $id_chapter)
 		{
-			$commentManager = new \app\P4_model\CommentManager();
+			$commentManager = new \app\P4_model\CommentsManager();
 
 		    $affectedLines = $commentManager->signalComment($id_comment);
 

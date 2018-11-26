@@ -10,7 +10,7 @@
 		function chaptersBO($n_page)
 		{
 			$chapterPerPage = 10;
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 			$chaptersTotal = $chaptersManager -> getAllChapters();
 			$pagesTotal = ceil($chaptersTotal['total']/$chapterPerPage);
 
@@ -29,7 +29,7 @@
 
 		function getChapter($id_chapter)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 
 			$chapterLine= $chaptersManager -> getChapter($id_chapter);
 
@@ -45,7 +45,7 @@
 
 		function changeChapter($id_chapter, $title, $content)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 
 			$changeChapterLine= $chaptersManager -> updateChapter($id_chapter, $title, $content);
 			$chapterLine= $chaptersManager -> getChapter($id_chapter);
@@ -63,7 +63,7 @@
 
 		function createChapters($title, $content)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 			$chapters= $chaptersManager -> newChapter($title, $content);
 
 		    if ($chapters === false) {
@@ -78,7 +78,7 @@
 
 		function deleteChapter($id_chapter)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 			$chapters= $chaptersManager -> softDeleteChapter($id_chapter);
 
 		    if ($chapters === false) {
@@ -93,7 +93,7 @@
 
 		function draftChapter($id_chapter)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 			$chapters= $chaptersManager -> hideChapter($id_chapter);
 
 		    if ($chapters === false) {
@@ -108,7 +108,7 @@
 
 		function repostChapter($id_chapter)
 		{
-			$chaptersManager = new \app\P4_model\ChaptersManager();
+			$chaptersManager = new \app\P4_model\PostsManager();
 			$chapters= $chaptersManager -> validateChapter($id_chapter);
 
 		    if ($chapters === false) {
@@ -123,7 +123,7 @@
 
 		function deleteComment($id_comment)
 		{
-			$commentManager = new \app\P4_model\CommentManager();
+			$commentManager = new \app\P4_model\CommentsManager();
 
 		    $affectedLines = $commentManager->hideComment($id_comment);
 
@@ -139,7 +139,7 @@
 
 		function validateComment($id_comment)
 		{
-			$commentManager = new \app\P4_model\CommentManager();
+			$commentManager = new \app\P4_model\CommentsManager();
 
 		    $affectedLines = $commentManager->validComment($id_comment);
 

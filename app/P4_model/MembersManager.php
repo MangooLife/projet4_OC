@@ -3,7 +3,7 @@
 
     require_once("app/P4_model/Manager.php");
 
-	class ConnexionManager extends Manager
+	class MembersManager extends Manager
 	{
 		function registrationMember($pseudo, $email, $password)
 		{

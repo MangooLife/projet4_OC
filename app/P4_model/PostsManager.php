@@ -3,7 +3,7 @@
 
     require_once("app/P4_model/Manager.php");
 
-    class ChaptersManager extends Manager
+    class PostsManager extends Manager
     {
         public function getChapters($start, $end)
         {
